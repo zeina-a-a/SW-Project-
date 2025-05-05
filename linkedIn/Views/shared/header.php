@@ -16,7 +16,7 @@ $isEmployer = $user->isEmployer;
                     <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
                 </span>
                 <span class="mh-text">
-                    <a href="../Home/index.php" title=""><img src="../images/logo2.png" alt=""></a>
+                    <a href="../Home/index.php" title=""><img src="../../Assets/images/logo2.png" alt=""></a>
                 </span>
                 <span class="mh-btns-right">
                     <a class="fa fa-sliders" href="#shoppingbag"></a>
@@ -45,10 +45,12 @@ $isEmployer = $user->isEmployer;
                             <li><a href="../auth/landing.php" title="">My Groups</a></li>
                             <li><a href="../auth/landing.php" title="">Articles</a></li>
                             <?php if (!$isEmployer) : ?>
-                                <li><a href="../auth/" title="">Job Applications</a></li>
-                                <li><a href="../auth/" title="">Saved Jobs</a></li>
+                                <li><a href="../JobsUser/jobs.php" title="">All Jobs</a></li>
+                                <li><a href="../JobsUser/myApplications.php" title="">Job Applications</a></li>
+                                <li><a href="../JobsUser/mySavedJobs.php" title="">Saved Jobs</a></li>
                             <?php else: ?>
-                                <li><a href="../auth/" title="">Published Jobs</a></li>
+                                <li><a href="../Job/jobsEmp.php" title="">All Jobs</a></li>
+                                <li><a href="../Job/myPublished.php" title="">Published Jobs</a></li>
                                 
                             <?php endif; ?>
 
@@ -106,10 +108,12 @@ $isEmployer = $user->isEmployer;
                             <li><a href="" title="">Articles</a></li>
                             
                             <?php if (!$isEmployer) : ?>
-                                <li><a href="../auth/" title="">Job Applications</a></li>
-                                <li><a href="../auth/" title="">Saved Jobs</a></li>
+                                <li><a href="../JobsUser/jobs.php" title="">All Jobs</a></li>
+                                <li><a href="../JobsUser/myApplications.php" title="">Job Applications</a></li>
+                                <li><a href="../JobsUser/mySavedJobs.php" title="">Saved Jobs</a></li>
                             <?php else: ?>
-                                <li><a href="../auth/" title="">Published Jobs</a></li>
+                                <li><a href="../Job/jobsEmp.php" title="">All Jobs</a></li>
+                                <li><a href="../Job/myPublished.php" title="">Published Jobs</a></li>
                                 
                             <?php endif; ?>
 

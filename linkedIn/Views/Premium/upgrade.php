@@ -100,7 +100,8 @@ if (isset($_POST['connectionCount'])) {
 									</div>
 									<div class="col-lg-4 col-sm-6">
 										<div class="open-position">
-											<h4><a href="#" title="">Export Your Connections</a></h4>
+											<h4><a href="<?php if($user->isPremium) :?>
+											../Premium/exportConnection.php <?php endif;?>" title="">Export Your Connections</a></h4>
 											<a href="#" title="">Download your full list of connections anytime — perfect for offline analysis, outreach planning, or CRM syncing.</a>
 										</div>
 									</div>

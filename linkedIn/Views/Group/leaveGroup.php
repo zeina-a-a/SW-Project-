@@ -78,7 +78,7 @@ if (isset($_POST['groupId'])) {
                                                             <br>
                                                             <h11><a href="time-line.html" title=""><?php echo $group['description'] ?></a></h11>
                                                             <!--<span>public group</span>The Social Media Marketing Group-->
-                                                            <form action="leave.php" method="POST">
+                                                            <form action="leaveGroup.php" method="POST">
                                                                 <input type="hidden" name="groupId" value="<?php echo $group["groupId"] ?>">
                                                                 <button type="submit" class="add-butn">Leave Group</button>
 

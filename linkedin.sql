@@ -1,0 +1,346 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: May 05, 2025 at 07:51 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `linkedin`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `connections`
+--
+
+CREATE TABLE `connections` (
+  `connectionId` int(11) NOT NULL,
+  `senderId` int(11) NOT NULL,
+  `receiverId` int(11) NOT NULL,
+  `status` enum('Accepted','Rejected','Pending','') NOT NULL DEFAULT 'Pending',
+  `sentAt` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `connections`
+--
+
+INSERT INTO `connections` (`connectionId`, `senderId`, `receiverId`, `status`, `sentAt`) VALUES
+(1, 2, 3, 'Accepted', '2025-05-05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groupmembers`
+--
+
+CREATE TABLE `groupmembers` (
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
+--
+
+CREATE TABLE `groups` (
+  `groupId` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `adminId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `groups`
+--
+
+INSERT INTO `groups` (`groupId`, `name`, `description`, `adminId`) VALUES
+(2, 'ZFRS', 'teaaaaaaaaammm grouuuuuuuuup ', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobapplications`
+--
+
+CREATE TABLE `jobapplications` (
+  `userId` int(11) NOT NULL,
+  `jobId` int(11) NOT NULL,
+  `fullName` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(20) NOT NULL,
+  `resume` varchar(255) NOT NULL,
+  `expectedSalary` decimal(10,0) NOT NULL,
+  `yearsOfExperience` int(11) NOT NULL,
+  `appliedAt` date NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jobapplications`
+--
+
+INSERT INTO `jobapplications` (`userId`, `jobId`, `fullName`, `email`, `phone`, `resume`, `expectedSalary`, `yearsOfExperience`, `appliedAt`) VALUES
+(3, 1, 'sammaaaa', 'samasamy@gmail.com', '332323', 'njjfeflif', 4, 1, '2025-05-05'),
+(3, 2, 'sama', 'samasamy68@gmail.com', '8878786', '../../Views/uploads/18-17-23_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05'),
+(3, 3, 'sama', 'samasamy68@gmail.com', '8878786', '../../Views/uploads/19-30-26_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05'),
+(5, 1, 'ganna', 'gannasamy532@gmail.com', '8878786', '../../Views/uploads/19-36-23_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `jobs`
+--
+
+CREATE TABLE `jobs` (
+  `id` int(11) NOT NULL,
+  `jobTitle` varchar(50) NOT NULL,
+  `companyName` varchar(50) NOT NULL,
+  `jobDescription` text NOT NULL,
+  `employmentType` enum('Full-time','Part-time','Contract','Internship','Freelance') NOT NULL,
+  `location` enum('On-site','Remote','Hybrid','') NOT NULL,
+  `city` varchar(100) NOT NULL,
+  `salary` decimal(10,0) NOT NULL,
+  `applicationDeadline` date NOT NULL,
+  `contactEmail` varchar(100) NOT NULL,
+  `createdAt` date NOT NULL DEFAULT current_timestamp(),
+  `empId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `jobs`
+--
+
+INSERT INTO `jobs` (`id`, `jobTitle`, `companyName`, `jobDescription`, `employmentType`, `location`, `city`, `salary`, `applicationDeadline`, `contactEmail`, `createdAt`, `empId`) VALUES
+(1, 'job', 'job', '.netttttttt', 'Freelance', 'Remote', 'cairo', 12, '2025-05-05', 'zanzoon235@gmail.com', '2025-05-05', 2),
+(2, 'job2 ', 'jobbbbbbbb', 'doooooot neeeeett', 'Part-time', 'On-site', 'cairo', 12, '2025-05-05', 'zanzoon235@gmail.com', '2025-05-05', 2),
+(3, 'new job ro ', 'roooo', 'jobbbbbbb', 'Full-time', 'Hybrid', 'cairo', 12, '2025-05-05', 'rowidagamal33@gmail.com', '2025-05-05', 4),
+(4, 'new job ro ', 'roooo', 'kihoiho', 'Full-time', 'Remote', 'cairo', 12, '2025-05-05', 'rowidagamal33@gmail.com', '2025-05-05', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `posts`
+--
+
+CREATE TABLE `posts` (
+  `id` int(11) NOT NULL,
+  `content` varchar(255) NOT NULL,
+  `imagePath` varchar(255) NOT NULL,
+  `createdAt` date NOT NULL DEFAULT current_timestamp(),
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `content`, `imagePath`, `createdAt`, `userId`) VALUES
+(1, '', '', '2025-05-05', 2),
+(2, 'heloooooooooooo', '../../Views/uploads/03-11-00_admin4.jpg', '2025-05-05', 2),
+(4, 'fallaaaaaaaaa7aaaaaaaaaaaaaa samaaaaaaaaaaaa', '', '2025-05-05', 3),
+(5, 'اناااااااا فلااااحةةةةة (كود) و فلاااااااحةةة  عاممةةةةةة نسسسيت اقول اني فلاحة', '', '2025-05-05', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `savedjobs`
+--
+
+CREATE TABLE `savedjobs` (
+  `userId` int(11) NOT NULL,
+  `jobId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `savedjobs`
+--
+
+INSERT INTO `savedjobs` (`userId`, `jobId`) VALUES
+(3, 1),
+(3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `createdAt` date NOT NULL DEFAULT current_timestamp(),
+  `profilePhoto` varchar(255) NOT NULL,
+  `isEmployer` tinyint(1) NOT NULL DEFAULT 0,
+  `isPremium` tinyint(1) NOT NULL DEFAULT 0,
+  `coverPhoto` varchar(255) NOT NULL DEFAULT '../../Assets/images/resources/timeline-1.jpg',
+  `connectionCount` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `createdAt`, `profilePhoto`, `isEmployer`, `isPremium`, `coverPhoto`, `connectionCount`) VALUES
+(2, 'Zeina', 'zanzoona', 'zanzoon235@gmail.com', '123', '2025-05-05', '../../Views/uploads/02-27-18_group1.jpg', 1, 0, '', 0),
+(3, 'sama', 'ss', 'samasamy68@gmail.com', '123', '2025-05-05', '../../Views/uploads/03-45-45_commenter-3.jpg', 0, 1, '../../Assets/images/timeline-1.jpg', 11),
+(4, 'rowida', 'rowida g', 'rowidagamal33@gmail.com', '123', '2025-05-05', '../../Views/uploads/19-24-45_nearly1.jpg', 1, 0, '../../Assets/images/resources/timeline-1.jpg', 0),
+(5, 'ganna', 'g s', 'gannasamy532@gmail.com', '123', '2025-05-05', '../../Views/uploads/19-35-35_admin4.jpg', 0, 0, '../../Assets/images/resources/timeline-1.jpg', 0);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `connections`
+--
+ALTER TABLE `connections`
+  ADD PRIMARY KEY (`connectionId`);
+
+--
+-- Indexes for table `groupmembers`
+--
+ALTER TABLE `groupmembers`
+  ADD PRIMARY KEY (`groupId`),
+  ADD KEY `userId` (`userId`);
+
+--
+-- Indexes for table `groups`
+--
+ALTER TABLE `groups`
+  ADD PRIMARY KEY (`groupId`),
+  ADD KEY `adminId` (`adminId`);
+
+--
+-- Indexes for table `jobapplications`
+--
+ALTER TABLE `jobapplications`
+  ADD PRIMARY KEY (`userId`,`jobId`),
+  ADD KEY `jobId` (`jobId`);
+
+--
+-- Indexes for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `empId` (`empId`);
+
+--
+-- Indexes for table `posts`
+--
+ALTER TABLE `posts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
+
+--
+-- Indexes for table `savedjobs`
+--
+ALTER TABLE `savedjobs`
+  ADD PRIMARY KEY (`userId`,`jobId`),
+  ADD KEY `jobId` (`jobId`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `connections`
+--
+ALTER TABLE `connections`
+  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `groups`
+--
+ALTER TABLE `groups`
+  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `jobs`
+--
+ALTER TABLE `jobs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `posts`
+--
+ALTER TABLE `posts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `groupmembers`
+--
+ALTER TABLE `groupmembers`
+  ADD CONSTRAINT `groupmembers_ibfk_1` FOREIGN KEY (`groupId`) REFERENCES `groups` (`groupId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `groupmembers_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `groups`
+--
+ALTER TABLE `groups`
+  ADD CONSTRAINT `groups_ibfk_1` FOREIGN KEY (`adminId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `jobapplications`
+--
+ALTER TABLE `jobapplications`
+  ADD CONSTRAINT `jobapplications_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jobapplications_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `jobs`
+--
+ALTER TABLE `jobs`
+  ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`empId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `posts`
+--
+ALTER TABLE `posts`
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `savedjobs`
+--
+ALTER TABLE `savedjobs`
+  ADD CONSTRAINT `savedjobs_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `savedjobs_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

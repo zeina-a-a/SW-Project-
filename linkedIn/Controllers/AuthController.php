@@ -21,7 +21,7 @@ class AuthController
                 if (count($result) == 0) {
                     if (session_status() === PHP_SESSION_NONE) {
                         session_start();
-                    }                    
+                    }
                     $_SESSION["errMsg"] = "You have entered wrong email or password";
                     $this->db->closeConnection();
                     return false;
@@ -62,7 +62,7 @@ class AuthController
                 if (session_status() === PHP_SESSION_NONE) {
                     session_start();
                 }
-                
+
 
                 if (Email::sendEmail($_SESSION["email"], 'hello from Rody')) {
                     // Success
@@ -85,5 +85,18 @@ class AuthController
             return false;
         }
     }
+
+    public function logout()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        session_unset();
+        session_destroy();
+        header("Location:../../Views/Auth/login.php "); // or wherever your login page is
+        exit();
+    }
+
 }
+
 ?>

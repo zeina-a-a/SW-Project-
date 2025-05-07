@@ -58,6 +58,7 @@ $groups = $groupController->getAllGroups($userId);
 
         
 		<?php require_once '../shared/header.php'; ?>
+		
 
         <section>
             <div class="page-header">

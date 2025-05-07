@@ -5,7 +5,6 @@ require_once '../../Controllers/DBController.php';
 require_once '../../Models/Connection.php';
 require_once '../shared/sessionControl.php';
 
-// $isPremium = isset($_SESSION['isPremium']) && $_SESSION['isPremium']==1;
 
 //if($_SERVER['REQUEST_METHOD']==='POST'){
 $controller = new ConnectionController();

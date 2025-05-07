@@ -2,8 +2,9 @@
 <section>
 	<div class="feature-photo">
 		<figure><img src="<?php echo $user->coverPhoto ?>" alt=""></figure>
+		
 		<div class="add-btn">
-			<span>1205 followers</span>
+			<span><?php echo $user->connectionCount; ?> Connections  </span>
 			<a href="#" title="" data-ripple="">Connect</a>
 		</div>
 		<form class="edit-phto">
@@ -40,11 +41,11 @@
 							<li>
 								<a class="active" href="../Timeline/timeline.php" title="" data-ripple="">time line</a>
 
-								<a class="" href="timeline-friends.html" title="" data-ripple="">Connections</a>
-								<a class="" href="timeline-groups.html" title="" data-ripple="">Groups</a>
-								<a class="" href="timeline-groups.html" title="" data-ripple="">Articles</a>
-
-								<a class="" href="about.html" title="" data-ripple="">about</a>
+								<a class="" href="" title="" data-ripple="">Connections</a>
+								<a class="" href="../Group/leaveGroup.php" title="" data-ripple="">Groups</a>
+								<a class="" href="" title="" data-ripple="">Articles</a>
+<!-- 
+								<a class="" href="about.html" title="" data-ripple="">about</a> -->
 								<!-- <a class="" href="#" title="" data-ripple="">more</a> -->
 							</li>
 						</ul>

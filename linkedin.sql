@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2025 at 07:51 PM
+-- Generation Time: May 08, 2025 at 08:03 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -24,6 +24,29 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `articles`
+--
+
+CREATE TABLE `articles` (
+  `id` int(11) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `body` varchar(250) NOT NULL,
+  `author` varchar(100) NOT NULL,
+  `timestamp` date NOT NULL,
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `articles`
+--
+
+INSERT INTO `articles` (`id`, `title`, `body`, `author`, `timestamp`, `userId`) VALUES
+(1, 'hellllooooo', 'helooooooooooooooooooo', 'sama', '0000-00-00', 3),
+(3, 'nnn', '2222222', 'Zeina', '0000-00-00', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `connections`
 --
 
@@ -40,7 +63,88 @@ CREATE TABLE `connections` (
 --
 
 INSERT INTO `connections` (`connectionId`, `senderId`, `receiverId`, `status`, `sentAt`) VALUES
-(1, 2, 3, 'Accepted', '2025-05-05');
+(2, 3, 4, 'Pending', '2025-05-08'),
+(3, 3, 2, 'Accepted', '2025-05-08');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `education`
+--
+
+CREATE TABLE `education` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `studying_at` varchar(160) NOT NULL,
+  `from_year` date NOT NULL,
+  `to_year` date NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `education`
+--
+
+INSERT INTO `education` (`id`, `user_id`, `studying_at`, `from_year`, `to_year`, `description`) VALUES
+(2, 2, 'saaaaaaaaad', '2025-05-07', '2025-05-08', 'saaaaaaaaaaaaaaaaaaaaaadddddd'),
+(3, 3, 'samaaaaaaaaaaa', '2025-05-02', '2025-05-09', 'ssssssammmmmmmmmmmmmmmmmmmmmmmmmaaaaa ');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `eventrequests`
+--
+
+CREATE TABLE `eventrequests` (
+  `userId` int(11) NOT NULL,
+  `eventId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `eventrequests`
+--
+
+INSERT INTO `eventrequests` (`userId`, `eventId`) VALUES
+(2, 22);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `postedBy` varchar(255) NOT NULL,
+  `imagePath` varchar(255) NOT NULL,
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`id`, `title`, `description`, `postedBy`, `imagePath`, `userId`) VALUES
+(21, 'Event Gamed', 'You will like this event I\'m sure', 'seif', '', 7),
+(22, 'Event Gamed2', 'I\'m sure you will like this event', 'seif', 'uploads/events/681cc6dc359ab_group3.jpg', 7),
+(23, 'hellllooooo', 'hhhhhelllllllllo', 'zanzoona', 'uploads/events/681ced81b29db_facebook-office.jpg', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `experience`
+--
+
+CREATE TABLE `experience` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `work_at` varchar(150) NOT NULL,
+  `from_year` year(4) NOT NULL,
+  `to_year` year(4) NOT NULL,
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -135,6 +239,18 @@ INSERT INTO `jobs` (`id`, `jobTitle`, `companyName`, `jobDescription`, `employme
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `languages`
+--
+
+CREATE TABLE `languages` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `language_name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `posts`
 --
 
@@ -178,6 +294,18 @@ INSERT INTO `savedjobs` (`userId`, `jobId`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `skills`
+--
+
+CREATE TABLE `skills` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `skill_name` varchar(160) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -210,10 +338,44 @@ INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `createdAt`,
 --
 
 --
+-- Indexes for table `articles`
+--
+ALTER TABLE `articles`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- Indexes for table `connections`
 --
 ALTER TABLE `connections`
   ADD PRIMARY KEY (`connectionId`);
+
+--
+-- Indexes for table `education`
+--
+ALTER TABLE `education`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`user_id`);
+
+--
+-- Indexes for table `eventrequests`
+--
+ALTER TABLE `eventrequests`
+  ADD PRIMARY KEY (`userId`,`eventId`),
+  ADD KEY `eventId` (`eventId`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `experience`
+--
+ALTER TABLE `experience`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`user_id`);
 
 --
 -- Indexes for table `groupmembers`
@@ -244,6 +406,13 @@ ALTER TABLE `jobs`
   ADD KEY `empId` (`empId`);
 
 --
+-- Indexes for table `languages`
+--
+ALTER TABLE `languages`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`user_id`);
+
+--
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
@@ -258,6 +427,13 @@ ALTER TABLE `savedjobs`
   ADD KEY `jobId` (`jobId`);
 
 --
+-- Indexes for table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`user_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -268,10 +444,34 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `articles`
+--
+ALTER TABLE `articles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `connections`
 --
 ALTER TABLE `connections`
-  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `education`
+--
+ALTER TABLE `education`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `experience`
+--
+ALTER TABLE `experience`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -286,10 +486,22 @@ ALTER TABLE `jobs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `languages`
+--
+ALTER TABLE `languages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -300,6 +512,31 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `articles`
+--
+ALTER TABLE `articles`
+  ADD CONSTRAINT `articles_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `education`
+--
+ALTER TABLE `education`
+  ADD CONSTRAINT `education_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `eventrequests`
+--
+ALTER TABLE `eventrequests`
+  ADD CONSTRAINT `eventrequests_ibfk_1` FOREIGN KEY (`eventId`) REFERENCES `events` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `eventrequests_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `experience`
+--
+ALTER TABLE `experience`
+  ADD CONSTRAINT `experience_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `groupmembers`
@@ -328,6 +565,12 @@ ALTER TABLE `jobs`
   ADD CONSTRAINT `jobs_ibfk_1` FOREIGN KEY (`empId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `languages`
+--
+ALTER TABLE `languages`
+  ADD CONSTRAINT `languages_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
@@ -339,6 +582,12 @@ ALTER TABLE `posts`
 ALTER TABLE `savedjobs`
   ADD CONSTRAINT `savedjobs_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `savedjobs_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `skills`
+--
+ALTER TABLE `skills`
+  ADD CONSTRAINT `skills_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

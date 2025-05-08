@@ -41,9 +41,9 @@
 							<li>
 								<a class="active" href="../Timeline/timeline.php" title="" data-ripple="">time line</a>
 
-								<a class="" href="" title="" data-ripple="">Connections</a>
+								<a class="" href="../Timeline/timeline-friends.php" title="" data-ripple="">Connections</a>
 								<a class="" href="../Group/leaveGroup.php" title="" data-ripple="">Groups</a>
-								<a class="" href="" title="" data-ripple="">Articles</a>
+								<a class="" href="../Article/Article.php" title="" data-ripple="">Articles</a>
 <!-- 
 								<a class="" href="about.html" title="" data-ripple="">about</a> -->
 								<!-- <a class="" href="#" title="" data-ripple="">more</a> -->

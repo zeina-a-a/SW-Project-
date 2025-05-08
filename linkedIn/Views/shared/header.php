@@ -7,10 +7,13 @@ $userId = $_SESSION['userId'];
 $userController = new UserController();
 $user = $userController->getUser($userId);
 $isEmployer = $user->isEmployer;
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
-    $auth = new AuthController();
-    $auth->logout();
+if(isset($_POST['action'])){
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
+        $auth = new AuthController();
+        $auth->logout();
+    }
 }
+
 
 ?>
 
@@ -40,15 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
                     <li><a href="../Home/index.php" title="">Home</a></li>
                     <li><a href="../Group/joinGroup.php" title="">Groups</a></li>
                     <!-- <li><a href="../auth/" title="">Jobs</a></li> -->
-                    <li><a href="" title="">Events</a></li>
-                    <li><a href="" title="">Connections</a></li>
+                    <li><a href="../Event/requestEvent.php" title="">Events</a></li>
+                    <li><a href="../Timeline/timeline-friends.php" title="">Connections</a></li>
                 </ul>
             </li>
             <li><span>Time Line</span>
                 <ul>
                     <li><a href="../Timeline/timeline.php" title="">Profile</a></li>
                     <li><a href="../Group/leaveGroup.php" title="">My Groups</a></li>
-                    <li><a href="" title="">Articles</a></li>
+                    <li><a href="../Article/Article.php" title="">Articles</a></li>
                     <?php if (!$isEmployer) : ?>
                         <li><a href="../JobsUser/jobs.php" title="">All Jobs</a></li>
                         <li><a href="../JobsUser/myApplications.php" title="">Job Applications</a></li>
@@ -61,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
 
 
 
-                    <li><a href="" title="">Events</a></li>
+                    <li><a href="../Event/publishEvent.php" title="">Publish Event</a></li>
                     <li><a href="" title="">My Connections</a></li>
                     <li><a href="../premium/upgrade.php" title="">Upgrade Profile</a></li>
 
@@ -69,8 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
             </li>
             <li><span>Account Setting</span>
                 <ul>
-                    <li><a href="" title="">Edit Personal Info</a></li>
-                    <li><a href="" title="">Edit Account</a></li>
+                    <li><a href="../EditProfile/edit-work-eductation.php" title="">Edit Profile</a></li>
                     <li>
                         <!-- <a href="" title="Log Out">Log Out</a> -->
                         <form method="post">
@@ -81,14 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
                 </ul>
             </li>
             </li>
-            <!-- <li><span>More pages</span>
-                <ul>
-                    <li><a href="404-2.html" title="">404 error page</a></li>
-                    <li><a href="about.html" title="">about</a></li>
-                    <li><a href="contact.html" title="">contact</a></li>
-
-                </ul>
-            </li> -->
         </ul>
     </nav>
 </div><!-- responsive header -->
@@ -106,8 +100,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
                     <li><a href="../Home/index.php" title="">Home</a></li>
                     <li><a href="../Group/joinGroup.php" title="">Groups</a></li>
                     <!-- <li><a href="../auth/" title="">Jobs</a></li> -->
-                    <li><a href="" title="">Events</a></li>
-                    <li><a href="" title="">Connections</a></li>
+                    <li><a href="../Event/requestEvent.php" title="">Events</a></li>
+                    <li><a href="../Timeline/timeline-friends.php" title="">Connections</a></li>
 
                 </ul>
             </li>
@@ -116,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
                 <ul>
                     <li><a href="../Timeline/timeline.php" title="">Profile</a></li>
                     <li><a href="../Group/leaveGroup.php" title="">My Groups</a></li>
-                    <li><a href="" title="">Articles</a></li>
+                    <li><a href="../Article/Article.php" title="">Articles</a></li>
                     <?php if (!$isEmployer) : ?>
                         <li><a href="../JobsUser/jobs.php" title="">All Jobs</a></li>
                         <li><a href="../JobsUser/myApplications.php" title="">Job Applications</a></li>
@@ -129,8 +123,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
 
 
 
-                    <li><a href="" title="">Events</a></li>
-                    <li><a href="" title="">My Connections</a></li>
+                    <li><a href="../Event/publishEvent.php" title="">Publish Event</a></li>
+                    <li><a href="../Timeline/timeline-friends.php" title="">My Connections</a></li>
                     <li><a href="../premium/upgrade.php" title="">Upgrade Profile</a></li>
 
                 </ul>
@@ -138,8 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
             <li>
                 <a href="#" title="">account settings</a>
                 <ul>
-                    <li><a href="" title="">Edit Personal Info</a></li>
-                    <li><a href="" title="">Edit Account</a></li>
+                    <li><a href="../EditProfile/edit-work-eductation.php" title="">Edit Profile</a></li>
                     <li>
                         <!-- <a href="" title="Log Out">Log Out</a> -->
                         <form method="post">

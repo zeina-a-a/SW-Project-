@@ -6,6 +6,27 @@ class DBController
     public $dbPassword = "";
     public $dbName = "linkedin";
     public $connection;
+
+
+    public function __construct() {
+        try {
+            $this->connection = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);
+            
+            if ($this->connection->connect_error) {
+                error_log("Database connection failed: " . $this->connection->connect_error);
+                throw new Exception("Database connection failed: " . $this->connection->connect_error);
+            }
+
+        } catch (Exception $e) {
+            error_log("Error in DBController: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getConnection() {
+        return $this->connection;
+    }
+
     public function openConnection()
     {
         $this->connection = new mysqli($this->dbHost, $this->dbUser, $this->dbPassword, $this->dbName);

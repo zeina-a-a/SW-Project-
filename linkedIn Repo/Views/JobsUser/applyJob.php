@@ -35,20 +35,20 @@ if (
         !empty($_POST['yearsOfExperience'])
     ) { 
         $JP = new JobApplication();
-        $JP->userId =   $userId;
-        $JP->jobId = $_POST['jobId'];
-        $JP->fullName = $_POST['fullName'];
-        $JP->email = $_POST['email'];
-        $JP->phone = $_POST['phone'];
-        $JP->expectedSalary = $_POST['expectedSalary'];
-        $JP->yearsOfExperience = $_POST['yearsOfExperience'];
+        $JP->setUserId($userId);
+        $JP->setJobId($_POST['jobId']);
+        $JP->setFullName($_POST['fullName']);
+        $JP->setEmail($_POST['email']);
+        $JP->setPhone($_POST['phone']);
+        $JP->setExpectedSalary($_POST['expectedSalary']);
+        $JP->setYearsOfExperience($_POST['yearsOfExperience']);
 
 
         $resumePath = AddMedia::upload('resume');
         if ($resumePath === false) {
             $errorMsg = "Error uploading resume.";
         } else {
-            $JP->resume = $resumePath;
+            $JP->setResume($resumePath) ;
         }
         
 

@@ -1,8 +1,9 @@
 <?php 
 
 require_once '../../Database/Database.php';
+require_once '../../IRepositories/IBaseRepository.php';
 
-abstract class BaseRepository 
+abstract class BaseRepository implements IBaseRepository
 {
     protected $connection;
 

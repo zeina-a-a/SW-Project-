@@ -4,10 +4,11 @@
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/user.php';
 require_once '../../Repositories/UserRepository.php';
+require_once '../../IRepositories/IUserRepository.php';
 
 class UserController
 {
-    public UserRepository  $_userRepository;
+    public IUserRepository  $_userRepository;
 
     public function __construct()
     {
@@ -42,16 +43,16 @@ class UserController
         }
         if (count($result) > 0) {
             $user = new User();
-            $user->id = $result[0]['id'];
-            $user->name = $result[0]['name'];
-            $user->email = $result[0]['email'];
-            $user->profilePhoto = $result[0]['profilePhoto'];
-            $user->username = $result[0]['username'];
-            $user->password = $result[0]['password'];
-            $user->coverPhoto = '../../Assets/images/resources/timeline-1.jpg';
-            $user->connectionCount = $result[0]['connectionCount'];
-            $user->isPremium = $result[0]['isPremium'];
-            $user->isEmployer = $result[0]['isEmployer'];
+            $user->setId($result[0]['id']) ;
+            $user->setName($result[0]['name']) ;
+            $user->setEmail($result[0]['email']) ;
+            $user->setProfilePhoto($result[0]['profilePhoto']) ;
+            $user->setUsername($result[0]['username']) ;
+            $user->setPassword($result[0]['password']) ;
+            $user->setCoverPhoto('../../Assets/images/resources/timeline-1.jpg') ;
+            $user->setConnectionCount($result[0]['connectionCount']) ;
+            $user->setIsPremium( $result[0]['isPremium']) ;
+            $user->setIsEmployer($result[0]['isEmployer']) ;
             return $user;
         }
         return false;

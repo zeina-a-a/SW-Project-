@@ -8,12 +8,15 @@ $errorMsg = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($_POST['name']) && !empty($_POST['description'])) {
-        $group = new Group();
+        //$group = new Group();
         $groupController = new GroupController();
 
-        $group->name = $_POST['name'];
-        $group->description = $_POST['description'];
-        $group->adminId = $userId;
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $group = new Group($name, $description, $userId);
+        //$group->name = $_POST['name'];
+        //$group->description = $_POST['description'];
+        //$group->adminId = $userId;
 
         var_dump($_POST);
 

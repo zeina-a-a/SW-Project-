@@ -82,16 +82,16 @@ if (isset($_GET['id']) && isset($_GET['userId'])) {
 
 											<form method="post" action="deletePost.php" enctype="multipart/form-data">
 
-												<input type="hidden" name="id" value="<?php echo $post->id; ?>">
+												<input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
 												<div class="form-group">
-													<img name="imagePath" src="<?php echo $post->imagePath ?>" alt="">
-													<input disabled type="hidden" name="imagePath" value="<?php echo $post->imagePath ?>">
+													<img name="imagePath" src="<?php echo $post->getImagePath() ?>" alt="">
+													<input disabled type="hidden" name="imagePath" value="<?php echo $post->getImagePath() ?>">
 													
 
 												</div>
 												<div class="form-group">
 
-													<textarea  name="content" rows="4" id="textarea" ><?php echo htmlspecialchars($post->content); ?></textarea>
+													<textarea  name="content" rows="4" id="textarea" ><?php echo htmlspecialchars($post->getContent()); ?></textarea>
 													<label class="control-label" for="textarea">Post Content</label><i class="mtrl-select"></i>
 												</div>
 												<div class="attachments">

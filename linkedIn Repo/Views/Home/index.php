@@ -10,7 +10,8 @@ $postController = new postController();
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['content'])) {
 
     $post = new Post();
-    $post->content = $_POST['content'];
+    $post->setContent($_POST['content']);
+
 
     $result = $postController->addPost($post);
     if ($result) {
@@ -71,7 +72,7 @@ $user = $userController->getUser($userId);
                                     <div class="central-meta">
                                         <div class="new-postbox">
                                             <figure>
-                                                <img src="<?php echo $user->profilePhoto ?>" alt="">
+                                                <img src="<?php echo $user->getProfilePhoto() ?>" alt="">
                                             </figure>
                                             <div class="newpst-input">
                                                 <form method="post" action="index.php" enctype="multipart/form-data">

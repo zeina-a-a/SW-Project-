@@ -10,8 +10,8 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
     if (!empty($_POST['email']) && !empty($_POST['password'])) {
         $user = new User();
         $auth = new AuthController();
-        $user->email = $_POST['email'];
-        $user->password = $_POST['password'];
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
 
 
         if (!$auth->login($user)) {

@@ -4,12 +4,12 @@
 require_once '../../Models/Group.php';
 require_once '../../Repositories/GroupRepository.php';
 require_once '../../Models/GroupMember.php';
-
+require_once '../../IRepositories/IGroupRepository.php';
 
 
 class GroupController
 {
-    public GroupRepository $_groupRepository;
+    public IGroupRepository $_groupRepository;
 
     public function __construct()
     {
@@ -26,12 +26,12 @@ class GroupController
     {
         return $this->_groupRepository->getMyGroupsQuery($userId);
     }
-    public function join($group)
+    public function join(GroupMember $group)
     {
 
         $result = $this->_groupRepository->checkJoinQuery($group);
 
-        if ($result) {
+        if (!$result) {
             $_SESSION["errorMsg"] = "You are already a member of this group.";
             return false;
         } else {
@@ -44,9 +44,10 @@ class GroupController
     {
         return $this->_groupRepository->addGroupQuery($group);
     }
-    public function leaveGroup($groupId, $userId)
+    public function leaveGroup(int $groupId, int $userId)
     {
 
         return $this->_groupRepository->leaveGroupQuery($groupId, $userId);
     }
 }
+?>

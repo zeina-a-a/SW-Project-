@@ -2,8 +2,8 @@
 require_once 'BaseRepository.php';
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/Post.php';
-
-class PostRepository extends BaseRepository
+require_once '../../IRepositories/IPostRepository.php';
+class PostRepository extends BaseRepository implements IPostRepository
 {
 
     protected $connection;
@@ -30,7 +30,9 @@ class PostRepository extends BaseRepository
 
     public function addPostQuery($post)
     {
-        $query = "insert into posts (content, userId, createdAt,imagePath) VALUES ('$post->content',$post->userId,NOW(),'$post->imagePath')";
+        $query = "INSERT INTO posts (content, userId, createdAt, imagePath)
+          VALUES ('{$post->getContent()}', {$post->getUserId()}, NOW(), '{$post->getImagePath()}')";
+
         $result = $this->insert($query);
         if ($result != false) {
             return true;
@@ -54,7 +56,7 @@ class PostRepository extends BaseRepository
 
     public function editPostQuery($post)
     {
-        $query = "update posts set content = '$post->content', imagePath = '$post->imagePath',createdAt = NOW() where id = '$post->id'";
+        $query = "update posts set content = '{$post->getContent()}' , imagePath = '{$post->getImagePath()}',createdAt = NOW() where id = '{$post->getId()}'";
             $result = $this->update($query);
             return $result;
     }

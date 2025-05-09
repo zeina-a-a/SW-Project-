@@ -3,10 +3,10 @@
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/Post.php';
 require_once '../../Repositories/PostRepository.php';
-
+require_once '../../IRepositories/IPostRepository.php';
 class PostController
 {
-    public PostRepository $_postRepository;
+    public IPostRepository $_postRepository;
 
     public function __construct()
     {
@@ -29,9 +29,9 @@ class PostController
             if ($mediaPath === false) {
                 $errorMsg = "Error in media file upload.";
             } else {
-                $post->imagePath = $mediaPath ?? NULL;
+                $post->setImagePath($mediaPath ?? NULL);
             }
-            $post->userId = $_SESSION['userId'];
+            $post->setUserId($_SESSION['userId']);
             $result = $this->_postRepository->addPostQuery($post);
             return $result;
     }
@@ -43,11 +43,11 @@ class PostController
             return false; 
         }
         $post = new Post();
-        $post->id = $result[0]['id'];
-        $post->content = $result[0]['content'];
-        $post->imagePath = $result[0]['imagePath'];
-        $post->createdAt = $result[0]['createdAt'];
-        $post->userId = $result[0]['userId'];
+        $post->setId($result[0]['id']) ;
+        $post->setContent($result[0]['content']) ;
+        $post->setImagePath($result[0]['imagePath']) ;
+        $post->setCreatedAt($result[0]['createdAt']) ;
+        $post->setUserId($result[0]['userId']) ;
         return $post;
     }
 
@@ -55,11 +55,11 @@ class PostController
     {
         $mediaPath = AddMedia::upload('imagePath');
             if ($mediaPath !== null) {
-                $post->imagePath = $mediaPath;
+                $post->setImagePath($mediaPath) ;
             } else {
-                $post->imagePath = $_POST['imagePath'];
+                $post->setImagePath($_POST['imagePath']) ;
             }
-            $post->content = $_POST['content'];
+            $post->setContent($_POST['content']) ;
             $result = $this->_postRepository->editPostQuery($post);
             return $result; 
 
@@ -68,7 +68,7 @@ class PostController
     public function deletePost($id)
     {
 
-
+        
         $result = $this->_postRepository->deletePostQuery($id);
         return $result;
     }

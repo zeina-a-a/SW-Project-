@@ -1,7 +1,8 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/User.php';
-class EmpJobRepository extends BaseRepository
+require_once '../../IRepositories/IEmpJobRepository.php';
+class EmpJobRepository extends BaseRepository implements IEmpJobRepository
 {
     protected $connection;
 
@@ -12,11 +13,20 @@ class EmpJobRepository extends BaseRepository
 
     public function publishJobQuery(Job $job)
     {
-
-        $query = "INSERT INTO jobs (jobTitle,companyName,jobDescription,employmentType,location,city,salary,applicationDeadline,contactEmail,empId
-            ) VALUES (
-                '$job->jobTitle','$job->companyName','$job->jobDescription','$job->employmentType','$job->location','$job->city','$job->salary','$job->applicationDeadline','$job->contactEmail','$job->empId'
-            )";
+        // Using getters to access the Job object properties
+        $query = "INSERT INTO jobs (jobTitle, companyName, jobDescription, employmentType, location, city, salary, applicationDeadline, contactEmail, empId)
+                  VALUES (
+                    '".$job->getJobTitle()."',
+                    '".$job->getCompanyName()."',
+                    '".$job->getJobDescription()."',
+                    '".$job->getEmploymentType()."',
+                    '".$job->getLocation()."',
+                    '".$job->getCity()."',
+                    '".$job->getSalary()."',
+                    '".$job->getApplicationDeadline()."',
+                    '".$job->getContactEmail()."',
+                    '".$job->getEmpId()."'
+                  )";
 
         $result = $this->insert($query);
         if ($result) {
@@ -25,7 +35,6 @@ class EmpJobRepository extends BaseRepository
         return false;
     }
 
-
     public function getPublishedJobsByUserQuery($userId)
     {
         $query = "SELECT * FROM jobs WHERE empId = $userId";
@@ -33,3 +42,4 @@ class EmpJobRepository extends BaseRepository
         return $result;
     }
 }
+?>

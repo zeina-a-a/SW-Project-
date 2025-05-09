@@ -80,16 +80,16 @@ else {
 
 											<form method="post" action="editPost.php" enctype="multipart/form-data">
 
-												<input type="hidden" name="id" value="<?php echo $post->id; ?>">
+												<input type="hidden" name="id" value="<?php echo $post->getId(); ?>">
 												<div class="form-group">
-													<img name="image_path" src="<?php echo $post->imagePath ?>" alt="">
-													<input type="hidden" name="image_path" value="<?php echo $post->imagePath ?>">
+													<img name="image_path" src="<?php echo $post->getImagePath() ?>" alt="">
+													<input type="hidden" name="image_path" value="<?php echo $post->getImagePath() ?>">
 													
 
 												</div>
 												<div class="form-group">
 
-													<textarea name="content" rows="4" id="textarea" required="required"><?php echo htmlspecialchars($post->content); ?></textarea>
+													<textarea name="content" rows="4" id="textarea" required="required"><?php echo htmlspecialchars($post->getContent()); ?></textarea>
 													<label class="control-label" for="textarea">Post Content</label><i class="mtrl-select"></i>
 												</div>
 												<div class="attachments">

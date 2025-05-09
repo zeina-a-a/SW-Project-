@@ -2,8 +2,8 @@
 
 require_once 'BaseRepository.php';
 require_once '../../Models/Connection.php';
-
-class ConnectionRepository extends BaseRepository
+require_once '../../IRepositories/IConnectionRepository.php';
+class ConnectionRepository extends BaseRepository implements IConnectionRepository
 {
     protected $connection;
 
@@ -24,3 +24,4 @@ class ConnectionRepository extends BaseRepository
         }
     }
 }
+?>

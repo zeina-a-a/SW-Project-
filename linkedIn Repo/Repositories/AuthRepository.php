@@ -1,8 +1,9 @@
 <?php
-
 require_once 'BaseRepository.php';
+require_once '../../IRepositories/IAuthRepository.php';
 require_once '../../Models/User.php';
-class AuthRepository extends BaseRepository
+
+class AuthRepository extends BaseRepository implements IAuthRepository
 {
     protected $connection;
 
@@ -11,9 +12,10 @@ class AuthRepository extends BaseRepository
         $this->connection = Database::getInstance()->getConnection();
     }
 
+    // Login query using getter methods
     public function loginQuery(User $user)
     {
-        $query = "SELECT * FROM users WHERE email= '$user->email' AND password = '$user->password'";
+        $query = "SELECT * FROM users WHERE email= '" . $user->getEmail() . "' AND password = '" . $user->getPassword() . "'";
         $result = $this->select($query);
         if ($result === false) {
             return false;
@@ -22,9 +24,10 @@ class AuthRepository extends BaseRepository
         }
     }
 
+    // Check if user is already registered using getter methods
     public function checkRegisterQuery(User $user)
     {
-        $checkQuery = "SELECT * FROM users WHERE email = '$user->email'";
+        $checkQuery = "SELECT * FROM users WHERE email = '" . $user->getEmail() . "'";
         $existingUser = $this->select($checkQuery);
         if ($existingUser && count($existingUser) > 0) {
             return true;
@@ -32,10 +35,11 @@ class AuthRepository extends BaseRepository
         return false;
     }
 
+    // Register user using getter methods
     public function registerQuery(User $user)
     {
-        $query = "INSERT INTO users (name,username,password,email,profilePhoto,isEmployer) 
-                VALUES ('$user->name','$user->username','$user->password','$user->email','$user->profilePhoto','$user->isEmployer')";
+        $query = "INSERT INTO users (name, username, password, email, profilePhoto, isEmployer) 
+                  VALUES ('" . $user->getName() . "','" . $user->getUsername() . "','" . $user->getPassword() . "','" . $user->getEmail() . "','" . $user->getProfilePhoto() . "','" . $user->getIsEmployer() . "')";
         $result = $this->insert($query);
         if ($result != false) {
             return true;
@@ -44,3 +48,4 @@ class AuthRepository extends BaseRepository
         return false;
     }
 }
+?>

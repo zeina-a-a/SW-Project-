@@ -8,10 +8,7 @@ require_once '../shared/sessionControl.php';
 $groupController = new GroupController();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['groupId'])) {
-    $group = new GroupMember();
-    $group->groupId = $_POST['groupId'];
-    $group->userId = $userId; 
-
+    $group = new GroupMember((int)$_POST['groupId'], $userId);
     if ($groupController->join($group)) {
         header("Location: joinGroup.php?joined=1");
         exit();
@@ -104,9 +101,9 @@ $groups = $groupController->getAllGroups($userId);
                                                         <div class="nearly-pepls">
                                                             
                                                             <div class="pepl-info">
-                                                                <h4><a href="" title=""><?php echo $group['name'] ?></a></h4>
+                                                                <h4><a href="time-line.html" title=""><?php echo $group['name'] ?></a></h4>
                                                                 <br>
-                                                                <h11><a href="" title=""><?php echo $group['description'] ?></a></h11>
+                                                                <h11><a href="time-line.html" title=""><?php echo $group['description'] ?></a></h11>
                                                                 <!--<span>public group</span>The Social Media Marketing Group-->
                                                                 <form action="joinGroup.php" method="POST">
                                                                     <input type="hidden" name="groupId" value="<?php echo $group["groupId"] ?>">

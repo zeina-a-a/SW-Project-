@@ -14,18 +14,18 @@ if (isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password
         
         $auth = new AuthController();
         $user = new User();
-        $user->name = $_POST['name'];
-        $user->username = $_POST['username'];
-        $user->password = $_POST['password'];
-        $user->email = $_POST['email'];
-        $user->isEmployer = $_POST['isEmployer'];
+        $user->setName($_POST['name']);
+        $user->setUsername($_POST['username']);
+        $user->setPassword($_POST['password']);
+        $user->setEmail($_POST['email']);
+        $user->setIsEmployer($_POST['isEmployer']);
 
         $mediaPath = AddMedia::upload('profilePhoto');
 
         if ($mediaPath === false) {
             $errorMsg = "Error in media file upload.";
         } else {
-            $user->profilePhoto = $mediaPath ?? NULL;
+            $user->setProfilePhoto($mediaPath ?? NULL);
         }
 
         if (empty($errorMsg)) {

@@ -3,9 +3,9 @@
 require_once 'BaseRepository.php';
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/user.php';
+require_once '../../IRepositories/IUserRepository.php';
 
-
-class UserRepository extends BaseRepository
+class UserRepository extends BaseRepository implements IUserRepository
 {
     protected $connection;
 

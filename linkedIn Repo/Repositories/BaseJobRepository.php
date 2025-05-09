@@ -1,9 +1,10 @@
 <?php
 
 require_once 'BaseRepository.php';
+require_once '../../IRepositories/IBaseJobRepository.php';
 require_once '../../Models/User.php';
 
-class BaseJobRepository extends BaseRepository
+class BaseJobRepository extends BaseRepository implements IBaseJobRepository
 {
     protected $connection;
 

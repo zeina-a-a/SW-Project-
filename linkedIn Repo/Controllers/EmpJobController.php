@@ -4,12 +4,14 @@ require_once '../../Models/JobApplication.php';
 require_once '../../Services/Email.php';
 require_once '../../Repositories/EmpJobRepository.php';
 require_once '../../Repositories/BaseJobRepository.php';
+require_once '../../IRepositories/IEmpJobRepository.php';
+require_once '../../IRepositories/IBaseJobRepository.php';
 
 class EmpJobController 
 {
 
-    public EmpJobRepository $_empjobRepository;
-    public BaseJobRepository $_basejobRepository;
+    public IEmpJobRepository $_empjobRepository;
+    public IBaseJobRepository $_basejobRepository;
 
     public function __construct()
     {
@@ -17,9 +19,6 @@ class EmpJobController
         $this->_basejobRepository = new BaseJobRepository();
         
     }
-   
-
-  
 
     public function publishJob(Job $job)
     {

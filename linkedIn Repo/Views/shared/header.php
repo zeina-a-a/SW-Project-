@@ -3,10 +3,14 @@
 
 require_once '../../Controllers/UserController.php';
 require_once '../../Controllers/AuthController.php';
+require_once '../../Controllers/ShowcaseController.php';
 $userId = $_SESSION['userId'];
 $userController = new UserController();
 $user = $userController->getUser($userId);
-$isEmployer = $user->isEmployer;
+$isEmployer = $user->getIsEmployer();
+$showcaseController = new ShowcaseController();
+$myShowcase = $showcaseController->getShowcasePageByUserId($userId);
+
 if(isset($_POST['action'])){
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['action'] === 'logout') {
         $auth = new AuthController();
@@ -141,16 +145,23 @@ if(isset($_POST['action'])){
                     </li>
 
                 </ul>
+
+                <li>
+                <a href="#" title="">Showcase Page</a>
+                <ul>
+                    <?php if ($myShowcase): ?>
+                        <li>
+                            <a href="#" title="" onclick="document.getElementById('showcase-modal').style.display='block';return false;">View My Showcase</a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <a href="../../Views/Showcase/Createshowcasepage.php" title="">Create Showcase Page</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
             </li>
 
-            <!-- <li>
-                <a href="#" title="">more pages</a>
-                <ul>
-                    <li><a href="404-2.html" title="">404 error page</a></li>
-                    <li><a href="about.html" title="">about</a></li>
-                    <li><a href="contact.html" title="">contact</a></li>
-                </ul>
-            </li> -->
+            </li>
         </ul>
         <ul class="setting-area">
             <li>
@@ -166,3 +177,17 @@ if(isset($_POST['action'])){
         <span class="ti-menu main-menu" data-ripple=""></span>
     </div>
 </div>
+
+<?php if ($myShowcase): ?>
+<div id="showcase-modal" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%); background:#fff; padding:30px; border-radius:10px; box-shadow:0 0 20px #0008; z-index:9999;">
+    <h2><?php echo htmlspecialchars($myShowcase->getTitle()); ?></h2>
+    <p><strong>Body:</strong> <?php echo htmlspecialchars($myShowcase->getBody()); ?></p>
+    <p><strong>Website:</strong> <a href="<?php echo htmlspecialchars($myShowcase->getWebsite()); ?>" target="_blank"><?php echo htmlspecialchars($myShowcase->getWebsite()); ?></a></p>
+    <p><strong>Industry:</strong> <?php echo htmlspecialchars($myShowcase->getIndustry()); ?></p>
+    <?php if ($myShowcase->getImagePath()): ?>
+        <img src="<?php echo htmlspecialchars($myShowcase->getImagePath()); ?>" alt="Logo" style="max-width:200px;max-height:200px;">
+    <?php endif; ?>
+    <br><br>
+    <button onclick="document.getElementById('showcase-modal').style.display='none';">Close</button>
+</div>
+<?php endif; ?>

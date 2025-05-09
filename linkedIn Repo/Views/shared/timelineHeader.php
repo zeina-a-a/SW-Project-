@@ -1,10 +1,10 @@
 
 <section>
 	<div class="feature-photo">
-		<figure><img src="<?php echo $user->coverPhoto ?>" alt=""></figure>
+		<figure><img src="<?php echo $user->getCoverPhoto() ?>" alt=""></figure>
 		
 		<div class="add-btn">
-			<span><?php echo $user->connectionCount; ?> Connections  </span>
+			<span><?php echo $user->getConnectionCount(); ?> Connections  </span>
 			<a href="#" title="" data-ripple="">Connect</a>
 		</div>
 		<form class="edit-phto">
@@ -19,7 +19,7 @@
 				<div class="col-lg-2 col-sm-3">
 					<div class="user-avatar">
 						<figure>
-							<img src="<?php echo $user->profilePhoto ?>" alt="">
+							<img src="<?php echo $user->getProfilePhoto() ?>" alt="">
 							<form method="post" action="../profile/upload.php" enctype="multipart/form-data">
 								<i class="fa fa-camera-retro"></i>
 								<label class="fileContainer">
@@ -36,7 +36,7 @@
 					<div class="timeline-info">
 						<ul>
 							<li class="admin-name">
-								<h5><?php echo $user->name ?></h5>
+								<h5><?php echo $user->getName() ?></h5>
 							</li>
 							<li>
 								<a class="active" href="../Timeline/timeline.php" title="" data-ripple="">time line</a>
@@ -44,9 +44,7 @@
 								<a class="" href="../Timeline/timeline-friends.php" title="" data-ripple="">Connections</a>
 								<a class="" href="../Group/leaveGroup.php" title="" data-ripple="">Groups</a>
 								<a class="" href="../Article/Article.php" title="" data-ripple="">Articles</a>
-<!-- 
-								<a class="" href="about.html" title="" data-ripple="">about</a> -->
-								<!-- <a class="" href="#" title="" data-ripple="">more</a> -->
+
 							</li>
 						</ul>
 					</div>

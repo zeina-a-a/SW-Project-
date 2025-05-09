@@ -7,7 +7,7 @@ $userController = new UserController();
 $user = $userController->getUser($userId);
 if (isset($_POST['connectionCount'])) {
 	$connectionCount = $_POST['connectionCount'];
-	$userController->upgradeUser($user->id, $connectionCount);
+	$userController->upgradeUser($user->getId(), $connectionCount);
 	// header('Location: ../Timeline/timeline.php');
 }
 ?>
@@ -66,7 +66,7 @@ if (isset($_POST['connectionCount'])) {
 
 									<h2>Fuel your long-term growth with <span>Premium</span>.</h2>
 									<form method="post" action="upgrade.php">
-										<input type="hidden" name="connectionCount" value="<?php echo $user->connectionCount; ?>">
+										<input type="hidden" name="connectionCount" value="<?php echo $user->getConnectionCount(); ?>">
 										<button type="submit" class="mtr-btn"><span>Upgrade Now</span></button>
 									</form>
 
@@ -76,14 +76,14 @@ if (isset($_POST['connectionCount'])) {
 
 								<div class="post-filter-sec">
 									<div style="text-align: center;">
-										<?php if (isset($_SESSION['successMsg']) || $user->isPremium): ?>
+										<?php if (isset($_SESSION['successMsg']) || $user->getIsPremium()): ?>
 											<span><?php echo 'You Are A Premium User'; ?></span>
 											<?php unset($_SESSION['successMsg']); ?>
 										<?php endif; ?>
 										
 									</div>
 									<div style="text-align: center;">
-										<span>You Currently Have <?php echo $user->connectionCount; ?> Connections</span>
+										<span>You Currently Have <?php echo $user->getConnectionCount(); ?> Connections</span>
 									</div>
 
 								</div>
@@ -108,7 +108,7 @@ if (isset($_POST['connectionCount'])) {
 									</div>
 									<div class="col-lg-4 col-sm-6">
 										<div class="open-position">
-											<h4><a href="<?php if ($user->isPremium) : ?>
+											<h4><a href="<?php if ($user->getIsPremium()) : ?>
 											../Premium/exportConnection.php <?php endif; ?>" title="">Export Your Connections</a></h4>
 											<a href="#" title="">Download your full list of connections anytime — perfect for offline analysis, outreach planning, or CRM syncing.</a>
 										</div>

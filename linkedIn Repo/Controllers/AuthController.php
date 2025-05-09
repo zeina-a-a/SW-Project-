@@ -4,10 +4,11 @@ require_once '../../Services/Email.php';
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/User.php';
 require_once '../../Repositories/AuthRepository.php';
+require_once '../../IRepositories/IAuthRepository.php';
 
 class AuthController
 {
-    public AuthRepository $_authRepository;
+    public IAuthRepository $_authRepository;
 
     public function __construct()
     {

@@ -1,12 +1,13 @@
 <?php
 
 require_once '../../Repositories/ConnectionRepository.php';
+require_once '../../IRepositories/IConnectionRepository.php';
 require_once '../../Models/Connection.php';
 
 
 class ConnectionController
 {
-    public ConnectionRepository $_connectionRepository;
+    public IConnectionRepository $_connectionRepository;
 
     public function __construct()
     {

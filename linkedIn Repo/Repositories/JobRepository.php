@@ -1,7 +1,8 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/User.php';
-class JobRepository extends BaseRepository
+require_once'../../IRepositories/IJobRepository.php';
+class JobRepository extends BaseRepository implements IJobRepository
 {
     protected $connection;
 
@@ -15,9 +16,18 @@ class JobRepository extends BaseRepository
     
     public function ApplyJobQuery(JobApplication $JP)
     {
-
-        $query = "INSERT INTO jobapplications (userId,jobId, fullName, email, phone, resume, expectedSalary, yearsOfExperience)
-            VALUES ($JP->userId,'$JP->jobId', '$JP->fullName', '$JP->email', '$JP->phone', '$JP->resume', '$JP->expectedSalary', '$JP->yearsOfExperience')";
+        // Using getters to access the JobApplication object properties
+        $query = "INSERT INTO jobapplications (userId, jobId, fullName, email, phone, resume, expectedSalary, yearsOfExperience)
+                  VALUES (
+                    ".$JP->getUserId().",
+                    '".$JP->getJobId()."',
+                    '".$JP->getFullName()."',
+                    '".$JP->getEmail()."',
+                    '".$JP->getPhone()."',
+                    '".$JP->getResume()."',
+                    '".$JP->getExpectedSalary()."',
+                    '".$JP->getYearsOfExperience()."'
+                  )";
         $result = $this->insert($query);
         if ($result) {
             return true;

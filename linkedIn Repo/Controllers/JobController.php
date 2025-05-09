@@ -4,14 +4,16 @@ require_once '../../Models/Job.php';
 require_once '../../Models/JobApplication.php';
 require_once '../../Services/Email.php';
 require_once '../../Repositories/JobRepository.php';
+require_once '../../IRepositories/IJobRepository.php';
 require_once '../../Repositories/BaseJobRepository.php';
+require_once '../../IRepositories/IBaseJobRepository.php';
 
 
 class JobController
 {
 
-    public JobRepository $_jobRepository;
-    public BaseJobRepository $_basejobRepository;
+    public IJobRepository $_jobRepository;
+    public IBaseJobRepository $_basejobRepository;
 
     public function __construct()
     {

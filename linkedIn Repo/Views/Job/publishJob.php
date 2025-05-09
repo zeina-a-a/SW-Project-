@@ -11,16 +11,16 @@ if (isset($_POST['jobTitle']) && isset($_POST['companyName']) && isset($_POST['j
 
 		$job = new Job;
 		$jbcontroller = new EmpJobController();
-		$job->jobTitle = $_POST['jobTitle'];
-		$job->companyName = $_POST['companyName'];
-		$job->jobDescription = $_POST['jobDescription'];
-		$job->employmentType = $_POST['employmentType'];
-		$job->location = $_POST['location'];
-		$job->city = $_POST['city'];
-		$job->salary = $_POST['salary'];
-		$job->applicationDeadline = $_POST['applicationDeadline'];
-		$job->contactEmail = $_POST['contactEmail'];
-		$job->empId = $userId;
+		$job->setJobTitle($_POST['jobTitle']);
+        $job->setCompanyName($_POST['companyName']);
+		$job->setJobDescription($_POST['jobDescription']);
+		$job->setEmploymentType($_POST['employmentType']);
+		$job->setLocation($_POST['location']);
+		$job->setCity($_POST['city']);
+		$job->setSalary($_POST['salary']);
+		$job->setApplicationDeadline($_POST['applicationDeadline']);
+		$job->setContactEmail($_POST['contactEmail']);
+		$job->setEmpId($userId);
 
 		if ($jbcontroller->publishJob($job)) {
 			header("location: ../Home/index.php");

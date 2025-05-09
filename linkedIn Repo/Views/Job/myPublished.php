@@ -1,11 +1,12 @@
 <?php
+require_once '../../Controllers/EmpJobController.php';
 require_once '../../Controllers/JobController.php';
 require_once '../shared/sessionControl.php';
 
 
 $isEmployer = isset($_SESSION['isEmployer']) && $_SESSION['isEmployer'] == 1;
-$jobController = new JobController();
-$publishedJobs = $jobController->getPublishedJobsByUser($userId);
+$empjobController = new EmpJobController();
+$publishedJobs = $empjobController->getPublishedJobsByUser($userId);
 ?>
 <!DOCTYPE html>
 <html lang="en">

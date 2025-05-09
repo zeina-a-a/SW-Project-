@@ -1,5 +1,5 @@
 <?php
-
+require_once '../../Controllers/EmpJobController.php';
 require_once '../../Controllers/JobController.php';
 require_once '../shared/sessionControl.php';
 
@@ -10,7 +10,7 @@ if (isset($_POST['jobTitle']) && isset($_POST['companyName']) && isset($_POST['j
 
 
 		$job = new Job;
-		$jbcontroller = new JobController();
+		$jbcontroller = new EmpJobController();
 		$job->jobTitle = $_POST['jobTitle'];
 		$job->companyName = $_POST['companyName'];
 		$job->jobDescription = $_POST['jobDescription'];
@@ -119,7 +119,7 @@ if (isset($_POST['jobTitle']) && isset($_POST['companyName']) && isset($_POST['j
 													</div>
 
 													<div class="form-group">
-														<input type="text" id="salary" name="salary" />
+														<input type="number" id="salary" name="salary" />
 														<label class="control-label" for="salary">Salary Range (optional)</label><i class="mtrl-select"></i>
 													</div>
 

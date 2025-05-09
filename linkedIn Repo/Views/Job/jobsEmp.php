@@ -1,11 +1,10 @@
 <?php
 
 require_once '../../Models/job.php';
-require_once '../../Controllers/JobController.php';
+require_once '../../Controllers/EmpJobController.php';
 require_once '../shared/sessionControl.php';
-
-$jobcontroller = new JobController();
-$Jobs = $jobcontroller->getAllJobs();
+$empjobcontroller = new EmpJobController();
+$Jobs = $empjobcontroller->getAllJobs();
 $errMsg = "";
 ?>
 <!DOCTYPE html>
@@ -79,15 +78,6 @@ $errMsg = "";
 					<!-- Apply button -->
 					<div style="margin-top: 15px;">
 					
-		 			<!-- <form action="applyJob.php" method="GET">
-                       <input type="hidden" name="jobId" value="<?php echo $job['id']; ?>">
-                       <button type="submit" class="btn btn-primary">Apply</button>
-                     </form></div>
-					 <div style="margin-top: 15px;">
-					 <form action="saveJob.php" method="GET">
-                       <input type="hidden" name="jobId" value="<?php echo $job['id']; ?>">
-                      <button type="submit" class="btn btn-primary">Save</button>
-                     </form> -->
 
 
 					</div>

@@ -97,11 +97,11 @@ if (isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password
                                     <label class="control-label" for="username">User Name</label><i class="mtrl-select"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" required="required" id="password" name="password" />
+                                    <input minlength="6" maxlength="10" type="password" required="required" id="password" name="password" />
                                     <label class="control-label" for="password">Password</label><i class="mtrl-select"></i>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" required="required" id="email" name="email" />
+                                    <input type="email" required="required" id="email" name="email" />
                                     <label class="control-label" for="email">Email</label><i class="mtrl-select"></i>
                                 </div>
                                 <div class="form-group">
@@ -121,7 +121,7 @@ if (isset($_POST['name']) && isset($_POST['username']) && isset($_POST['password
                                     <div  class="form-group">
                                         <label>
                                             <i class="fa fa-image"></i> Upload Photo
-                                            <input name="profilePhoto" type="file" style="display: none;">
+                                            <input accept="image/*" name="profilePhoto" type="file" style="display: none;">
 
                                         </label>
                                     </div>

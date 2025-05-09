@@ -142,7 +142,7 @@ if (
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <input type="text" id="phone" name="phone" required />
+                                                    <input type="tel" id="phone" name="phone" required />
                                                     <label class="control-label" for="phone">Phone Number</label><i class="mtrl-select"></i>
                                                 </div>
 

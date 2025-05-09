@@ -19,7 +19,7 @@ class LanguageController {
         $language->languageName = $languageName;
 
         $query = "INSERT INTO languages (user_id, language_name) 
-                 VALUES ('$language->userId', '$language->languageName')";
+                VALUES ('$language->userId', '$language->languageName')";
         return $this->db->insert($query);
     }
 

@@ -104,9 +104,9 @@ $groups = $groupController->getAllGroups($userId);
                                                         <div class="nearly-pepls">
                                                             
                                                             <div class="pepl-info">
-                                                                <h4><a href="time-line.html" title=""><?php echo $group['name'] ?></a></h4>
+                                                                <h4><a href="" title=""><?php echo $group['name'] ?></a></h4>
                                                                 <br>
-                                                                <h11><a href="time-line.html" title=""><?php echo $group['description'] ?></a></h11>
+                                                                <h11><a href="" title=""><?php echo $group['description'] ?></a></h11>
                                                                 <!--<span>public group</span>The Social Media Marketing Group-->
                                                                 <form action="joinGroup.php" method="POST">
                                                                     <input type="hidden" name="groupId" value="<?php echo $group["groupId"] ?>">

@@ -69,7 +69,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
                             <form method="post" action="login.php">
                                 <div class="form-group">
-                                    <input type="text" name="email" required="required" />
+                                    <input type="email" name="email" required="required" />
                                     <label class="control-label">Email</label><i class="mtrl-select"></i>
                                 </div>
                                 <div class="form-group">

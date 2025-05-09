@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2025 at 08:03 PM
+-- Generation Time: May 09, 2025 at 08:56 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `articles` (
 
 INSERT INTO `articles` (`id`, `title`, `body`, `author`, `timestamp`, `userId`) VALUES
 (1, 'hellllooooo', 'helooooooooooooooooooo', 'sama', '0000-00-00', 3),
-(3, 'nnn', '2222222', 'Zeina', '0000-00-00', 2);
+(4, 'articcccleeeeee', 'heeeeeeeloooooooooooo', 'meeeeeeeeeeee', '0000-00-00', 10);
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,9 @@ CREATE TABLE `connections` (
 
 INSERT INTO `connections` (`connectionId`, `senderId`, `receiverId`, `status`, `sentAt`) VALUES
 (2, 3, 4, 'Pending', '2025-05-08'),
-(3, 3, 2, 'Accepted', '2025-05-08');
+(3, 3, 2, 'Accepted', '2025-05-08'),
+(4, 3, 8, 'Accepted', '2025-05-09'),
+(5, 10, 3, 'Accepted', '2025-05-09');
 
 -- --------------------------------------------------------
 
@@ -86,7 +88,6 @@ CREATE TABLE `education` (
 --
 
 INSERT INTO `education` (`id`, `user_id`, `studying_at`, `from_year`, `to_year`, `description`) VALUES
-(2, 2, 'saaaaaaaaad', '2025-05-07', '2025-05-08', 'saaaaaaaaaaaaaaaaaaaaaadddddd'),
 (3, 3, 'samaaaaaaaaaaa', '2025-05-02', '2025-05-09', 'ssssssammmmmmmmmmmmmmmmmmmmmmmmmaaaaa ');
 
 -- --------------------------------------------------------
@@ -105,7 +106,7 @@ CREATE TABLE `eventrequests` (
 --
 
 INSERT INTO `eventrequests` (`userId`, `eventId`) VALUES
-(2, 22);
+(10, 23);
 
 -- --------------------------------------------------------
 
@@ -157,6 +158,13 @@ CREATE TABLE `groupmembers` (
   `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `groupmembers`
+--
+
+INSERT INTO `groupmembers` (`groupId`, `userId`) VALUES
+(5, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -175,7 +183,10 @@ CREATE TABLE `groups` (
 --
 
 INSERT INTO `groups` (`groupId`, `name`, `description`, `adminId`) VALUES
-(2, 'ZFRS', 'teaaaaaaaaammm grouuuuuuuuup ', 3);
+(2, 'ZFRS', 'teaaaaaaaaammm grouuuuuuuuup ', 3),
+(3, 'newwwwwwwww', 'newwwwwwwwwwwwwwwwwwwww', 8),
+(4, 'newwwwwwwww grouuuuuuuuuuup', 'nnnnnnnnnnnnnnn', 3),
+(5, 'new group newwwww', 'wwwwwwwww', 3);
 
 -- --------------------------------------------------------
 
@@ -200,10 +211,8 @@ CREATE TABLE `jobapplications` (
 --
 
 INSERT INTO `jobapplications` (`userId`, `jobId`, `fullName`, `email`, `phone`, `resume`, `expectedSalary`, `yearsOfExperience`, `appliedAt`) VALUES
-(3, 1, 'sammaaaa', 'samasamy@gmail.com', '332323', 'njjfeflif', 4, 1, '2025-05-05'),
-(3, 2, 'sama', 'samasamy68@gmail.com', '8878786', '../../Views/uploads/18-17-23_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05'),
-(3, 3, 'sama', 'samasamy68@gmail.com', '8878786', '../../Views/uploads/19-30-26_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05'),
-(5, 1, 'ganna', 'gannasamy532@gmail.com', '8878786', '../../Views/uploads/19-36-23_Zeina-Abdelhameed-Ahmed-FlowCV-Resume-20250221.pdf', 5, 11, '2025-05-05');
+(3, 6, 'zeinaa', 'zanzoon235@gmail.com', '8878786', '../../Views/uploads/16-37-22_proposal sama.pdf', 78, 6, '2025-05-09'),
+(3, 8, 'zeinaa', 'zanzoon235@gmail.com', '8878786', '../../Views/uploads/17-43-03_activity.pdf', 78, 6, '2025-05-09');
 
 -- --------------------------------------------------------
 
@@ -231,10 +240,11 @@ CREATE TABLE `jobs` (
 --
 
 INSERT INTO `jobs` (`id`, `jobTitle`, `companyName`, `jobDescription`, `employmentType`, `location`, `city`, `salary`, `applicationDeadline`, `contactEmail`, `createdAt`, `empId`) VALUES
-(1, 'job', 'job', '.netttttttt', 'Freelance', 'Remote', 'cairo', 12, '2025-05-05', 'zanzoon235@gmail.com', '2025-05-05', 2),
-(2, 'job2 ', 'jobbbbbbbb', 'doooooot neeeeett', 'Part-time', 'On-site', 'cairo', 12, '2025-05-05', 'zanzoon235@gmail.com', '2025-05-05', 2),
-(3, 'new job ro ', 'roooo', 'jobbbbbbb', 'Full-time', 'Hybrid', 'cairo', 12, '2025-05-05', 'rowidagamal33@gmail.com', '2025-05-05', 4),
-(4, 'new job ro ', 'roooo', 'kihoiho', 'Full-time', 'Remote', 'cairo', 12, '2025-05-05', 'rowidagamal33@gmail.com', '2025-05-05', 4);
+(6, 'roooooooooooooo ', 'rooooooo', 'roooo', 'Part-time', 'On-site', 'cairo', 12, '2025-05-09', 'zanzoon235@gmail.com', '2025-05-09', 8),
+(7, 'roooooooooooooo ', 'rooooooo', 'roooo', 'Part-time', 'On-site', 'cairo', 12, '2025-05-09', 'zanzoon235@gmail.com', '2025-05-09', 8),
+(8, 'roooooooooooooo ', 'rooooooo', 'roooo', 'Part-time', 'On-site', 'cairo', 12, '2025-05-09', 'zanzoon235@gmail.com', '2025-05-09', 8),
+(9, 'zzzzzzzzzzzzzzzzzzzzzz', 'zzzzzzzzzz', 'zzzzzz', 'Contract', 'On-site', 'cairo', 12, '2025-05-09', 'zanzoon235@gmail.com', '2025-05-09', 8),
+(10, 'zzzzzzzzzzzzzzzzzzzzzz', 'zzzzzzzzzz', 'zzzzzz', 'Contract', 'On-site', 'cairo', 12, '2025-05-09', 'zanzoon235@gmail.com', '2025-05-09', 8);
 
 -- --------------------------------------------------------
 
@@ -267,10 +277,9 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `content`, `imagePath`, `createdAt`, `userId`) VALUES
-(1, '', '', '2025-05-05', 2),
-(2, 'heloooooooooooo', '../../Views/uploads/03-11-00_admin4.jpg', '2025-05-05', 2),
 (4, 'fallaaaaaaaaa7aaaaaaaaaaaaaa samaaaaaaaaaaaa', '', '2025-05-05', 3),
-(5, 'اناااااااا فلااااحةةةةة (كود) و فلاااااااحةةة  عاممةةةةةة نسسسيت اقول اني فلاحة', '', '2025-05-05', 3);
+(5, 'اناااااااا فلااااحةةةةة (كود) و فلاااااااحةةة  عاممةةةةةة نسسسيت اقول اني فلاحة', '', '2025-05-05', 3),
+(11, 'repoooooooooooooo', '', '2025-05-09', 10);
 
 -- --------------------------------------------------------
 
@@ -288,8 +297,32 @@ CREATE TABLE `savedjobs` (
 --
 
 INSERT INTO `savedjobs` (`userId`, `jobId`) VALUES
-(3, 1),
-(3, 2);
+(3, 6),
+(3, 8);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `showcasepage`
+--
+
+CREATE TABLE `showcasepage` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `body` text NOT NULL,
+  `website` varchar(100) NOT NULL,
+  `industry` varchar(100) NOT NULL,
+  `imagePath` varchar(255) NOT NULL,
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `showcasepage`
+--
+
+INSERT INTO `showcasepage` (`id`, `title`, `body`, `website`, `industry`, `imagePath`, `userId`) VALUES
+(1, 'zeinaaa', 'aaaaaaaaaaaaaaaa', 'http://localhost:3000/Views/Showcase/Createshowcasepage.php', 'zzzzz', '../../Views/uploads/19-13-12_WhatsApp Image 2025-02-20 at 22.34.33.jpeg', 8),
+(2, 'zeinaaa', 'aaaaaaaaaaaaaaaa', 'http://localhost:3000/Views/Showcase/Createshowcasepage.php', 'zzzzz', '', 3);
 
 -- --------------------------------------------------------
 
@@ -328,10 +361,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `email`, `password`, `createdAt`, `profilePhoto`, `isEmployer`, `isPremium`, `coverPhoto`, `connectionCount`) VALUES
-(2, 'Zeina', 'zanzoona', 'zanzoon235@gmail.com', '123', '2025-05-05', '../../Views/uploads/02-27-18_group1.jpg', 1, 0, '', 0),
 (3, 'sama', 'ss', 'samasamy68@gmail.com', '123', '2025-05-05', '../../Views/uploads/03-45-45_commenter-3.jpg', 0, 1, '../../Assets/images/timeline-1.jpg', 11),
-(4, 'rowida', 'rowida g', 'rowidagamal33@gmail.com', '123', '2025-05-05', '../../Views/uploads/19-24-45_nearly1.jpg', 1, 0, '../../Assets/images/resources/timeline-1.jpg', 0),
-(5, 'ganna', 'g s', 'gannasamy532@gmail.com', '123', '2025-05-05', '../../Views/uploads/19-35-35_admin4.jpg', 0, 0, '../../Assets/images/resources/timeline-1.jpg', 0);
+(5, 'ganna', 'g s', 'gannasamy532@gmail.com', '123', '2025-05-05', '../../Views/uploads/19-35-35_admin4.jpg', 0, 0, '../../Assets/images/resources/timeline-1.jpg', 0),
+(8, 'rowida', 'ro', 'rowidagamal33@gmail.com', '123', '2025-05-09', '../../Views/uploads/01-29-40_bloglist-2.jpg', 1, 1, '../../Assets/images/resources/timeline-1.jpg', 10),
+(10, 'zeinaa', 'zzz', 'zanzoon235@gmail.com', '123456', '2025-05-09', '../../Views/uploads/17-28-48_faq.png', 1, 0, '../../Assets/images/resources/timeline-1.jpg', 0);
 
 --
 -- Indexes for dumped tables
@@ -427,6 +460,13 @@ ALTER TABLE `savedjobs`
   ADD KEY `jobId` (`jobId`);
 
 --
+-- Indexes for table `showcasepage`
+--
+ALTER TABLE `showcasepage`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `userId` (`userId`);
+
+--
 -- Indexes for table `skills`
 --
 ALTER TABLE `skills`
@@ -447,13 +487,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `connections`
 --
 ALTER TABLE `connections`
-  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `education`
@@ -477,13 +517,13 @@ ALTER TABLE `experience`
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
-  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `groupId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -495,7 +535,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `showcasepage`
+--
+ALTER TABLE `showcasepage`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `skills`
@@ -507,7 +553,7 @@ ALTER TABLE `skills`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Constraints for dumped tables
@@ -582,6 +628,12 @@ ALTER TABLE `posts`
 ALTER TABLE `savedjobs`
   ADD CONSTRAINT `savedjobs_ibfk_1` FOREIGN KEY (`jobId`) REFERENCES `jobs` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `savedjobs_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `showcasepage`
+--
+ALTER TABLE `showcasepage`
+  ADD CONSTRAINT `showcasepage_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `skills`

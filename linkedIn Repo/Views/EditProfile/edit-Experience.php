@@ -176,7 +176,7 @@ if (!empty($experiences)) {
 										<?php if ($edit_experience): ?>
 											<form method="post">
 												<input type="hidden" name="action" value="update">
-												<input type="hidden" name="id" value="<?php echo $edit_experience->id; ?>">
+												<input type="hidden" name="id" value="<?php echo $edit_experience->getId(); ?>">
 												<div class="form-group">
 													<label for="edit_work_at">Work at</label>
 													<input type="text" class="form-control" id="edit_work_at" name="work_at" value="<?php echo htmlspecialchars($edit_experience->getWorkAt()); ?>" required>
@@ -220,12 +220,12 @@ if (!empty($experiences)) {
 																<?php endif; ?>
 															</div>
 															<div>
-																<a href="edit-Experience.php?edit=<?php echo $experience->id; ?>" class="btn btn-primary btn-sm mr-2">
+																<a href="edit-Experience.php?edit=<?php echo $experience->getId(); ?>" class="btn btn-primary btn-sm mr-2">
 																	<i class="fa fa-edit"></i> Edit
 																</a>
 																<form method="post" class="delete-form d-inline">
 																	<input type="hidden" name="action" value="delete">
-																	<input type="hidden" name="id" value="<?php echo $experience->id; ?>">
+																	<input type="hidden" name="id" value="<?php echo $experience->getId(); ?>">
 																	<button type="submit" class="btn btn-danger btn-sm p-1" onclick="return confirm('Are you sure you want to delete this experience?')">
 																		<i class="fa fa-trash"></i> Delete
 																	</button>

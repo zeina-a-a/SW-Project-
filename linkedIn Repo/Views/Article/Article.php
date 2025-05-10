@@ -1,16 +1,14 @@
 <?php
 require_once '../../Controllers/ArticleController.php';
-require_once '../../Controllers/UserController.php';
 require_once '../shared/sessionControl.php';
-
 
 $articleController = new ArticleController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title']) && isset($_POST['body'])) {
-
 	$article = new Article();
-	$article->title = $_POST['title'];
-	$article->body = $_POST['body'];
+	$article->setTitle($_POST['title']);
+	$article->setBody($_POST['body']);
+	$article->setAuthor($_SESSION['userName']);
 
 	$result = $articleController->addArticle($article);
 	if ($result) {
@@ -61,7 +59,7 @@ $articles = $articleController->getAllArticles();
 										<div class="central-meta item">
 											<div class="new-postbox">
 												<figure>
-													<img src="<?php echo $user->profilePhoto?>" alt="">
+													<img src="<?php echo $user->getProfilePhoto()?>" alt="">
 												</figure>
 												<div class="newpst-input">
 													<form method="post" action="Article.php">
@@ -85,10 +83,10 @@ $articles = $articleController->getAllArticles();
 															<div class="user-post">
 																<div class="friend-info">
 																	<figure>
-																		<img src="<?php echo $article['authorImage'] ?>" alt="">
+																		<img src="<?php echo isset($article['authorImage']) ? $article['authorImage'] : '../../Assets/images/default-profile.png'; ?>" alt="">
 																	</figure>
 																	<div class="friend-name">
-																		<ins><a href="time-line.html" title=""><?php echo htmlspecialchars($article['authorName']); ?></a></ins>
+																		<ins><a href="time-line.html" title=""><?php echo isset($article['authorName']) ? htmlspecialchars($article['authorName']) : 'Unknown'; ?></a></ins>
 																	</div>
 																	<div class="post-meta">
 																		<div class="description">

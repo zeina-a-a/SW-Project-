@@ -1,6 +1,7 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/Education.php';
+require_once '../../IRepositories/IEducationRepository.php';
 
 class EducationRepository extends BaseRepository implements IEducationRepository
 {

@@ -12,16 +12,16 @@ class SkillController {
 
     public function addSkill($userId, $skillName) {
         $skill = new Skill();
-        $skill->userId = $userId;
-        $skill->skillName = $skillName;
+        $skill->setUserId($userId);
+        $skill->setSkillName($skillName);
         return $this->skillRepository->addSkillQuery($skill);
     }
 
     public function updateSkill($id, $userId, $skillName) {
         $skill = new Skill();
-        $skill->id = $id;
-        $skill->userId = $userId;
-        $skill->skillName = $skillName;
+        $skill->setId($id);
+        $skill->setUserId($userId);
+        $skill->setSkillName($skillName);
         return $this->skillRepository->updateSkillQuery($skill);
     }
 

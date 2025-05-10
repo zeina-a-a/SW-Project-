@@ -1,13 +1,14 @@
 <?php
-require_once 'DBController.php';
-// require_once '../../Models/User.php';
+
+//require_once '../../Models/User.php';
 require_once __DIR__ . '/../Models/User.php';
-// require_once '../../Models/Connection.php';
+//require_once '../../Models/Connection.php';
 require_once __DIR__ . '/../Models/Connection.php';
+require_once __DIR__ .'/../Repositories/SendConnectionRepository.php';
+require_once __DIR__ .'/../IRepositories/ISendConnectionRepository.php';
 
 
 
-// Handle POST requests
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
     $sendController = new SendController();
@@ -50,101 +51,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-class SendController {
-    private $dbController;
-    private $userModel;
-    private $connectionModel;
 
-    public function __construct() {
-        $this->dbController = new DBController();
-        $this->userModel = new User();
-        $this->connectionModel = new Connection();
+class SendController {
+
+    public ISendConnectionRepository $_sendConnectionRepository;
+
+    public function __construct()
+    {
+        $this->_sendConnectionRepository = new SendConnectionRepository();
     }
 
     public function sendConnectionRequest($senderId, $receiverId) {
-        // Check if connection already exists
-        if ($this->dbController->openConnection()) {
-            $checkQuery = "SELECT * FROM connections 
-                            WHERE (senderId = '$senderId' AND receiverId = '$receiverId')
-                            OR (senderId = '$receiverId' AND receiverId = '$senderId')";
-            $existing = $this->dbController->select($checkQuery);
-            
-            if (!empty($existing)) {
-                return false; // Connection already exists
-            }
-        }
 
-        $query = "INSERT INTO connections (senderId, receiverId, status ,sentAt) 
-                VALUES ('$senderId', '$receiverId', 'Pending' , now())";
-        return $this->dbController->insert($query);
+
+        $result =$this->_sendConnectionRepository->checkSendQuery($senderId,$receiverId);
+
+        if (!$result) {
+            return false;
+        } else {
+            $result = $this->_sendConnectionRepository->sendConnectionRequestQuery($senderId,$receiverId);
+            return true;
+        }
+    
     }
 
     public function acceptConnectionRequest($connectionId) {
-        if (!$this->dbController->openConnection()) {
-            return false;
-        }
-        $query = "UPDATE connections SET status = 'Accepted' 
-                WHERE connectionId = '$connectionId' AND status = 'Pending'";
-        return $this->dbController->update($query);
+        return $this->_sendConnectionRepository->acceptConnectionRequestQuery($connectionId);
     }
 
     public function rejectConnectionRequest($connectionId) {
-        if (!$this->dbController->openConnection()) {
-            return false;
-        }
-        $query = "UPDATE connections SET status = 'Rejected' 
-                WHERE connectionId = '$connectionId' AND status = 'Pending'";
-        return $this->dbController->update($query); 
+        return $this->_sendConnectionRepository->rejectConnectionRequestQuery($connectionId);
     }
 
     public function getFriends($userId) {
-        if ($this->dbController->openConnection()) {
-            $query = "SELECT u.*, c.connectionId as connection_id 
-                    FROM users u 
-                    INNER JOIN connections c ON (c.senderId = u.id OR c.receiverId = u.id)
-                    WHERE (c.senderId = '$userId' OR c.receiverId = '$userId')
-                    AND c.status = 'Accepted'
-                    AND u.id != '$userId'";
-            return $this->dbController->select($query);
-        }
-        return [];
+        return $this->_sendConnectionRepository->getFriendsQuery($userId);
     }
 
     public function getPendingConnections($userId) {
-        if ($this->dbController->openConnection()) {
-            $query = "SELECT u.*, c.connectionId as connection_id 
-                    FROM users u 
-                    INNER JOIN connections c ON c.senderId = u.id
-                    WHERE c.receiverId = '$userId' 
-                    AND c.status = 'Pending'";
-            return $this->dbController->select($query);
-        }
-        return [];
+        return $this->_sendConnectionRepository->getPendingConnectionsQuery($userId);
     }   
 
     public function getUsersExceptCurrent($userId) {
-        if ($this->dbController->openConnection()) {
-            $query = "SELECT u.* FROM users u 
-                    WHERE u.id != '$userId' 
-                    AND u.id NOT IN (
-                        SELECT CASE 
-                            WHEN senderId = '$userId' THEN receiverId 
-                            ELSE senderId 
-                        END 
-                        FROM connections 
-                        WHERE (senderId = '$userId' OR receiverId = '$userId')
-                        AND status = 'Accepted'
-                    )";
-            return $this->dbController->select($query);
-        }
-        return [];
+        return $this->_sendConnectionRepository->getUsersExceptCurrentQuery($userId);
     }
 
     public function removeConnection($connectionId) {
-        if (!$this->dbController->openConnection()) {
-            return false;
-        }
-        $query = "DELETE FROM connections WHERE connectionId = '$connectionId'";
-        return $this->dbController->delete($query);
+        return $this->_sendConnectionRepository->removeConnectionQuery($connectionId);
     }
 } 
+
+?>

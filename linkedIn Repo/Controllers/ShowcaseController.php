@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../Controllers/DBController.php';
+
 require_once '../../Services/AddMedia.php';
 require_once '../../Models/showcasepage.php';
 require_once '../../Repositories/ShowcaseRepository.php';

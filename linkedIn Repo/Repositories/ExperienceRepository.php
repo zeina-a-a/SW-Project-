@@ -1,6 +1,7 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/Experience.php';
+require_once '../../IRepositories/IExperienceRepository.php';
 
 class ExperienceRepository extends BaseRepository implements IExperienceRepository
 {

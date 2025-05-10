@@ -153,11 +153,11 @@ $educations = $educationController->getUserEducation($userId);
 													</div>
 													<div class="form-group">
 														<label for="from_year">From Year</label>
-														<input type="number" class="form-control" id="from_year" name="from_year" min="1900" max="2099" required>
+														<input type="date" class="form-control" id="from_year" name="from_year" required>
 													</div>
 													<div class="form-group">
 														<label for="to_year">To Year</label>
-														<input type="number" class="form-control" id="to_year" name="to_year" min="1900" max="2099">
+														<input type="date" class="form-control" id="to_year" name="to_year">
 													</div>
 													<div class="form-group">
 														<label for="description">Description</label>
@@ -172,18 +172,18 @@ $educations = $educationController->getUserEducation($userId);
 											<?php if ($edit_education): ?>
 												<form method="post">
 													<input type="hidden" name="action" value="update">
-													<input type="hidden" name="id" value="<?php echo $edit_education->id; ?>">
+													<input type="hidden" name="id" value="<?php echo $edit_education->getId(); ?>">
 													<div class="form-group">
 														<label for="edit_studying_at">School/University</label>
 														<input type="text" class="form-control" id="edit_studying_at" name="studying_at" value="<?php echo htmlspecialchars($edit_education->getStudyingAt()); ?>" required>
 													</div>
 													<div class="form-group">
 														<label for="edit_from_year">From Year</label>
-														<input type="number" class="form-control" id="edit_from_year" name="from_year" min="1900" max="2099" value="<?php echo htmlspecialchars($edit_education->getFromYear()); ?>" required>
+														<input type="date" class="form-control" id="edit_from_year" name="from_year" value="<?php echo htmlspecialchars($edit_education->getFromYear()); ?>" required>
 													</div>
 													<div class="form-group">
 														<label for="edit_to_year">To Year</label>
-														<input type="number" class="form-control" id="edit_to_year" name="to_year" min="1900" max="2099" value="<?php echo htmlspecialchars($edit_education->getToYear()); ?>">
+														<input type="date" class="form-control" id="edit_to_year" name="to_year" value="<?php echo htmlspecialchars($edit_education->getToYear()); ?>">
 													</div>
 													<div class="form-group">
 														<label for="edit_description">Description</label>
@@ -216,12 +216,12 @@ $educations = $educationController->getUserEducation($userId);
 																		<?php endif; ?>
 																	</div>
 																	<div>
-																		<a href="edit-work-eductation.php?edit=<?php echo $edu->id; ?>" class="btn btn-primary btn-sm mr-2">
+																		<a href="edit-work-eductation.php?edit=<?php echo $edu->getId(); ?>" class="btn btn-primary btn-sm mr-2">
 																			<i class="fa fa-edit"></i> Edit
 																		</a>
 																		<form method="post" class="delete-form d-inline">
 																			<input type="hidden" name="action" value="delete">
-																			<input type="hidden" name="id" value="<?php echo $edu->id; ?>">
+																			<input type="hidden" name="id" value="<?php echo $edu->getId(); ?>">
 																			<button type="submit" class="btn btn-danger btn-sm p-1" onclick="return confirm('Are you sure you want to delete this education entry?')">
 																				<i class="fa fa-trash"></i> Delete
 																			</button>
@@ -264,11 +264,11 @@ $educations = $educationController->getUserEducation($userId);
 							</div>
 							<div class="form-group">
 								<label for="edit_from_year">From Year</label>
-								<input type="number" class="form-control" id="edit_from_year" name="from_year" required>
+								<input type="date" class="form-control" id="edit_from_year" name="from_year" required>
 							</div>
 							<div class="form-group">
 								<label for="edit_to_year">To Year</label>
-								<input type="number" class="form-control" id="edit_to_year" name="to_year">
+								<input type="date" class="form-control" id="edit_to_year" name="to_year">
 							</div>
 							<div class="form-group">
 								<label for="edit_description">Description</label>

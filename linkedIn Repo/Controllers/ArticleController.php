@@ -1,133 +1,55 @@
 <?php
 
-require_once '../../Controllers/DBController.php';
-require_once '../../Services/AddMedia.php';
+require_once '../../Repositories/ArticleRepository.php';
+require_once '../../IRepositories/IArticleRepository.php';
 require_once '../../Models/Article.php';
 
 class ArticleController
 {
-    protected $db;
-    
+    public IArticleRepository $_articleRepository;
+
+    public function __construct()
+    {
+        $this->_articleRepository = new ArticleRepository();
+    }
+
     public function getAllArticles()
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "SELECT articles.id, articles.title, articles.author, articles.body, articles.userId,
-                        users.name AS authorName, users.profilePhoto AS authorImage
-                    FROM articles
-                    JOIN users ON articles.userId = users.id";
-            return $this->db->select($query);
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        return $this->_articleRepository->getAllArticlesQuery();
     }
 
     public function addArticle($article)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $article->userId = $_SESSION['userId'];
-            
-            // Get user information for author name
-            $userQuery = "SELECT name FROM users WHERE id = " . (int)$article->userId;
-            $userResult = $this->db->select($userQuery);
-            $authorName = $userResult[0]['name'];
-            
-            // Sanitize inputs to prevent SQL injection
-            $title = mysqli_real_escape_string($this->db->connection, $article->title);
-            $body = mysqli_real_escape_string($this->db->connection, $article->body);
-            $author = mysqli_real_escape_string($this->db->connection, $authorName);
-            $userId = (int)$article->userId;
-            
-            $query = "INSERT INTO articles (body, title, author, userId) 
-                    VALUES ('$body', '$title', '$author', $userId)";
-            
-            $result = $this->db->insert($query);
-            if (!$result) {
-                echo "Error in insertion: " . mysqli_error($this->db->connection);
-            }
-            return $result;
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        $article->setUserId($_SESSION['userId']);
+        return $this->_articleRepository->publishArticleQuery($article);
     }
+
     public function editArticle($article)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            // $mediaPath = AddMedia::upload('imagePath');
-            // if ($mediaPath !== null) {
-            //     $article->imagePath = $mediaPath;
-            // } else {
-            //     $article->imagePath = $_POST['imagePath'];
-            // }
-            $article->content = $_POST['content'];
-            $query = "update articles set content = '$article->content',createdAt = NOW() where id = '$article->id'";
-            $result = $this->db->update($query);
-            return $result;
-        }
-        return false;
+        // $article->setAuthor($_POST['author']);
+        return $this->_articleRepository->editArticleQuery($article);
     }
 
     public function deleteArticle($articleId, $userId)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            // First verify that the article belongs to the user
-            $checkQuery = "SELECT userId FROM articles WHERE id = " . (int)$articleId;
-            $result = $this->db->select($checkQuery);
-            
-            if ($result && $result[0]['userId'] == $userId) {
-                $query = "DELETE FROM articles WHERE id = " . (int)$articleId;
-                return $this->db->delete($query);
-            }
-            return false;
-        } else {
-            echo "Error in Database Connection";
-            return false;
+        // First verify that the article belongs to the user
+        $article = $this->_articleRepository->getArticleQuery($articleId);
+        if ($article && $article->getUserId() == $userId) {
+            return $this->_articleRepository->deleteArticleQuery($articleId);
         }
+        return false;
     }
 
     public function getArticleById($articleId)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "SELECT articles.id, articles.title, articles.body, articles.userId,
-                        users.name AS authorName, users.profilePhoto AS authorImage
-                    FROM articles
-                    JOIN users ON articles.userId = users.id
-                    WHERE articles.id = " . (int)$articleId;
-            $result = $this->db->select($query);
-            return $result ? $result[0] : false;
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        return $this->_articleRepository->getArticleQuery($articleId);
     }
 
     public function updateArticle($article)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $checkQuery = "SELECT userId FROM articles WHERE id = " . (int)$article->id;
-            $result = $this->db->select($checkQuery);
-            
-            if ($result && $result[0]['userId'] == $_SESSION['userId']) {
-                $title = mysqli_real_escape_string($this->db->connection, $article->title);
-                $body = mysqli_real_escape_string($this->db->connection, $article->body);
-                $id = (int)$article->id;
-                
-                $query = "UPDATE articles SET title = '$title', body = '$body' WHERE id = $id";
-                $updateResult = $this->db->update($query);
-                return $updateResult;
-            }
-            return false;
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        $article->setBody($_POST['body']);
+        $article->setTitle($_POST['title']);
+        $result = $this->_articleRepository->editArticleQuery($article);
+        return $result;
     }
 }
-

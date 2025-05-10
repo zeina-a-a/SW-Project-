@@ -6,9 +6,9 @@ $eventController = new EventController();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'], $_POST['description'])) {
     $event = new Event();
-    $event->title = $_POST['title'];
-    $event->description = $_POST['description'];
-    $event->postedBy = $_SESSION['userName'];
+    $event->setTitle($_POST['title']);
+    $event->setDescription($_POST['description']);
+    $event->setPostedBy($_SESSION['userName']);
 
     // Handle image upload
     $imagePath = null;
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'], $_POST['desc
             $imagePath = "uploads/events/" . $fileName; // relative to project root
         }
     }
-    $event->imagePath = $imagePath;
+    $event->setImagePath($imagePath);
 
     $result = $eventController->PublishEvent($event);
     if ($result !== false) {

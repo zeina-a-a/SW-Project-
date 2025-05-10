@@ -1,16 +1,16 @@
 <section>
     <div class="feature-photo">
-        <figure><img src="<?php echo $user->coverPhoto ?>" alt=""></figure>
+        <figure><img src="../../Assets/images/resources/timeline-1.jpg" alt=""></figure>
         
         <div class="add-btn">
-            <span><?php echo $user->connectionCount; ?> Connections  </span>
-            <a href="#" title="" data-ripple="">Connect</a>
+            <span>1205 followers</span>
+            <a href="#" title="" data-ripple="">Add Friend</a>
         </div>
         <form class="edit-phto">
             <i class="fa fa-camera-retro"></i>
             <label class="fileContainer">
                 Edit Cover Photo
-                <input type="file" />
+                <input type="file"/>
             </label>
         </form>
         <div class="container-fluid">
@@ -18,12 +18,12 @@
                 <div class="col-lg-2 col-sm-3">
                     <div class="user-avatar">
                         <figure>
-                            <img src="<?php echo $user->profilePhoto ?>" alt="">
-                            <form method="post" action="../profile/upload.php" enctype="multipart/form-data">
+                            <img src="<?php echo $user->getProfilePhoto()?>" alt="">
+                            <form class="edit-phto">
                                 <i class="fa fa-camera-retro"></i>
                                 <label class="fileContainer">
-                                    Edit Profile Photo
-                                    <input  type="file" name="profile_photo">
+                                    Edit Display Photo
+                                    <input type="file"/>
                                 </label>
                             </form>
                         </figure>
@@ -33,13 +33,15 @@
                     <div class="timeline-info">
                         <ul>
                             <li class="admin-name">
-                                <h5><?php echo $user->name ?></h5>
+                                <h5><?php echo $user->getName()?></h5>
                             </li>
                             <li>
-                                <a class="" href="../Timeline/timeline.php" title="" data-ripple="">time line</a>
-                                <a class="" href="../Timeline/timeline-friends.php" title="" data-ripple="">Connections</a>
-                                <a class="" href="../Group/leaveGroup.php" title="" data-ripple="">Groups</a>
-                                <a class="active" href="../Article/Article.php" title="" data-ripple="">Articles</a>
+                                <a class="" href="Article.php" title="" data-ripple="">Articles</a>
+                                <a class="" href="time-line.html" title="" data-ripple="">Photos</a>
+                                <a class="" href="timeline-videos.html" title="" data-ripple="">Videos</a>
+                                <a class="" href="timeline-friends.html" title="" data-ripple="">Friends</a>
+                                <a class="" href="timeline-groups.html" title="" data-ripple="">Groups</a>
+                                <a class="" href="about.html" title="" data-ripple="">about</a>
                             </li>
                         </ul>
                     </div>

@@ -12,16 +12,16 @@ class LanguageController {
 
     public function addLanguage($userId, $languageName) {
         $language = new Language();
-        $language->userId = $userId;
-        $language->languageName = $languageName;
+        $language->setUserId($userId);
+        $language->setLanguageName($languageName);
         return $this->languageRepository->addLanguageQuery($language);
     }
 
     public function updateLanguage($id, $userId, $languageName) {
         $language = new Language();
-        $language->id = $id;
-        $language->userId = $userId;
-        $language->languageName = $languageName;
+        $language->setId($id);
+        $language->setUserId($userId);
+        $language->setLanguageName($languageName);
         return $this->languageRepository->updateLanguageQuery($language);
     }
 

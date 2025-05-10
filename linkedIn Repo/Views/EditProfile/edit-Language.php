@@ -142,7 +142,7 @@ if (isset($_GET['edit'])) {
 											<?php if ($edit_language): ?>
 												<form method="post">
 													<input type="hidden" name="action" value="update">
-													<input type="hidden" name="id" value="<?php echo $edit_language->id; ?>">
+													<input type="hidden" name="id" value="<?php echo $edit_language->getId(); ?>">
 													<div class="form-group">
 														<label for="edit_language_name">Language</label>
 														<input type="text" class="form-control" id="edit_language_name" name="language_name" value="<?php echo htmlspecialchars($edit_language->getLanguageName()); ?>" required>

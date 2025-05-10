@@ -33,7 +33,7 @@ if (isset($_GET['id']) && isset($_GET['userId'])) {
 	}
 } 
 else {
-	header('Location: Location:timeline.php');
+	header('Location:timeline.php');
 	exit();
 }
 

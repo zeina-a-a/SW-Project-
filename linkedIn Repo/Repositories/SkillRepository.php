@@ -1,6 +1,7 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/Skill.php';
+require_once '../../IRepositories/ISkillRepository.php';
 
 class SkillRepository extends BaseRepository implements ISkillRepository
 {

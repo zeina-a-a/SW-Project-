@@ -1,6 +1,7 @@
 <?php
 require_once 'BaseRepository.php';
 require_once '../../Models/Language.php';
+require_once '../../IRepositories/ILanguageRepository.php';
 
 class LanguageRepository extends BaseRepository implements ILanguageRepository
 {

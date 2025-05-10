@@ -1,104 +1,50 @@
 <?php
 
-require_once '../../Controllers/DBController.php';
-require_once '../../Models/event.php';
+require_once '../../Repositories/EventRepository.php';
+require_once '../../Models/Event.php';
 
 class EventController
 {
-    public $db;
+    private $eventRepository;
+
+    public function __construct()
+    {
+        $this->eventRepository = new EventRepository();
+    }
 
     public function getAllEvents()
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "SELECT id, title, description, postedBy, userId FROM events ORDER BY id DESC";
-            return $this->db->select($query);
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        return $this->eventRepository->getAllEventsQuery();
     }
 
     public function PublishEvent($event)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $event->userId = $_SESSION['userId'];
-            $title = mysqli_real_escape_string($this->db->connection, $event->title);
-            $description = mysqli_real_escape_string($this->db->connection, $event->description);
-            $postedBy = mysqli_real_escape_string($this->db->connection, $event->postedBy);
-            $userId = (int)$event->userId;
-            $imagePath = $event->imagePath ? mysqli_real_escape_string($this->db->connection, $event->imagePath) : null;
-
-            $query = "INSERT INTO events (title, description, postedBy, userId" . ($imagePath ? ", imagePath" : "") . ") 
-                      VALUES ('$title', '$description', '$postedBy', $userId" . ($imagePath ? ", '$imagePath'" : "") . ")";
-
-            return $this->db->insert($query);
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        $event->setUserId($_SESSION['userId']);
+        return $this->eventRepository->publishEventQuery($event);
     }
 
     public function getEvent($id)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "SELECT * FROM events WHERE id = $id";
-            $result = $this->db->select($query);
-            if ($result && count($result) > 0) {
-                $event = new Event();
-                $event->id = $result[0]['id'];
-                $event->title = $result[0]['title'];
-                $event->description = $result[0]['description'];
-                $event->postedBy = $result[0]['postedBy'];
-                $event->userId = $result[0]['userId'];
-                $event->imagePath = $result[0]['imagePath'];
-                return $event;
-            }
-            return false;
-        }
-        return false;
+        return $this->eventRepository->getEventQuery($id);
     }
 
     public function RequestEvent(Event $event)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "INSERT INTO eventRequests (userId, eventId)
-                    VALUES ($event->userId, '$event->id')";
-            $result = $this->db->insert($query);
-            return $result ? 1 : 0;
-        } else {
-            echo "Error in Database Connection";
-            return false;
-        }
+        return $this->eventRepository->requestEventQuery($event->getUserId(), $event->getId());
     }
 
     public function editEvent($event)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $title = mysqli_real_escape_string($this->db->connection, $event->title);
-            $description = mysqli_real_escape_string($this->db->connection, $event->description);
-            $postedBy = mysqli_real_escape_string($this->db->connection, $event->postedBy);
-            $id = (int)$event->id;
-
-            $query = "UPDATE events SET title = '$title', description = '$description', postedBy = '$postedBy' WHERE id = $id";
-            $result = $this->db->update($query);
-            return $result;
-        }
-        return false;
+        return $this->eventRepository->editEventQuery($event);
     }
 
     public function deleteEvent($id)
     {
-        $this->db = new DBController();
-        if ($this->db->openConnection()) {
-            $query = "DELETE FROM events WHERE id = $id";
-            $result = $this->db->delete($query);
-            return $result !== false;
-        }
-        return false;
+        return $this->eventRepository->deleteEventQuery($id);
+    }
+
+    public function getJoinedEventIdsByUser($userId)
+    {
+        return $this->eventRepository->getJoinedEventIdsByUser($userId);
     }
 }

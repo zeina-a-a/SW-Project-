@@ -1,7 +1,6 @@
 <?php 
-
-require_once '../../Database/Database.php';
-require_once '../../IRepositories/IBaseRepository.php';
+require_once __DIR__ . '/../Database/Database.php';
+require_once __DIR__ . '/../IRepositories/IBaseRepository.php';
 
 abstract class BaseRepository implements IBaseRepository
 {

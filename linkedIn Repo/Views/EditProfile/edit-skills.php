@@ -139,7 +139,7 @@ $skills = $skillController->getUserSkills($userId);
 											<?php if ($edit_skill): ?>
 												<form method="post">
 													<input type="hidden" name="action" value="update">
-													<input type="hidden" name="id" value="<?php echo $edit_skill->id; ?>">
+													<input type="hidden" name="id" value="<?php echo $edit_skill->getId(); ?>">
 													<div class="form-group">
 														<label for="edit_skill_name">Skill Name</label>
 														<input type="text" class="form-control" id="edit_skill_name" name="skill_name" value="<?php echo htmlspecialchars($edit_skill->getSkillName()); ?>" required>

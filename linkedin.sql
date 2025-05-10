@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2025 at 08:56 PM
+-- Generation Time: May 10, 2025 at 04:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,7 +32,7 @@ CREATE TABLE `articles` (
   `title` varchar(150) NOT NULL,
   `body` varchar(250) NOT NULL,
   `author` varchar(100) NOT NULL,
-  `timestamp` date NOT NULL,
+  `timeStamp` date NOT NULL,
   `userId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -40,9 +40,10 @@ CREATE TABLE `articles` (
 -- Dumping data for table `articles`
 --
 
-INSERT INTO `articles` (`id`, `title`, `body`, `author`, `timestamp`, `userId`) VALUES
+INSERT INTO `articles` (`id`, `title`, `body`, `author`, `timeStamp`, `userId`) VALUES
 (1, 'hellllooooo', 'helooooooooooooooooooo', 'sama', '0000-00-00', 3),
-(4, 'articcccleeeeee', 'heeeeeeeloooooooooooo', 'meeeeeeeeeeee', '0000-00-00', 10);
+(4, 'articcccleeeeee', 'heeeeeeeloooooooooooo', 'meeeeeeeeeeee', '0000-00-00', 10),
+(6, 'ppppppppppppppp', 'bbbbbb', 'g s', '2025-05-10', 5);
 
 -- --------------------------------------------------------
 
@@ -65,8 +66,9 @@ CREATE TABLE `connections` (
 INSERT INTO `connections` (`connectionId`, `senderId`, `receiverId`, `status`, `sentAt`) VALUES
 (2, 3, 4, 'Pending', '2025-05-08'),
 (3, 3, 2, 'Accepted', '2025-05-08'),
-(4, 3, 8, 'Accepted', '2025-05-09'),
-(5, 10, 3, 'Accepted', '2025-05-09');
+(5, 10, 3, 'Accepted', '2025-05-09'),
+(6, 3, 5, 'Rejected', '2025-05-10'),
+(8, 8, 5, 'Accepted', '2025-05-10');
 
 -- --------------------------------------------------------
 
@@ -88,7 +90,9 @@ CREATE TABLE `education` (
 --
 
 INSERT INTO `education` (`id`, `user_id`, `studying_at`, `from_year`, `to_year`, `description`) VALUES
-(3, 3, 'samaaaaaaaaaaa', '2025-05-02', '2025-05-09', 'ssssssammmmmmmmmmmmmmmmmmmmmmmmmaaaaa ');
+(3, 3, 'samaaaaaaaaaaa', '2025-05-02', '2025-05-09', 'ssssssammmmmmmmmmmmmmmmmmmmmmmmmaaaaa '),
+(5, 3, 'fewfew', '0000-00-00', '0000-00-00', '3efeef'),
+(6, 3, 'fewfew', '0000-00-00', '0000-00-00', 'nnnnnnnnnn');
 
 -- --------------------------------------------------------
 
@@ -106,6 +110,7 @@ CREATE TABLE `eventrequests` (
 --
 
 INSERT INTO `eventrequests` (`userId`, `eventId`) VALUES
+(3, 23),
 (10, 23);
 
 -- --------------------------------------------------------
@@ -130,7 +135,8 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`id`, `title`, `description`, `postedBy`, `imagePath`, `userId`) VALUES
 (21, 'Event Gamed', 'You will like this event I\'m sure', 'seif', '', 7),
 (22, 'Event Gamed2', 'I\'m sure you will like this event', 'seif', 'uploads/events/681cc6dc359ab_group3.jpg', 7),
-(23, 'hellllooooo', 'hhhhhelllllllllo', 'zanzoona', 'uploads/events/681ced81b29db_facebook-office.jpg', 2);
+(23, 'hellllooooo', 'hhhhhelllllllllo', 'zanzoona', 'uploads/events/681ced81b29db_facebook-office.jpg', 2),
+(24, 'dddddddddd', 'ddddddddd', 'ss', '', 3);
 
 -- --------------------------------------------------------
 
@@ -146,6 +152,13 @@ CREATE TABLE `experience` (
   `to_year` year(4) NOT NULL,
   `description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `experience`
+--
+
+INSERT INTO `experience` (`id`, `user_id`, `work_at`, `from_year`, `to_year`, `description`) VALUES
+(5, 3, 'swwe', '2025', '2025', 'grereear');
 
 -- --------------------------------------------------------
 
@@ -258,6 +271,13 @@ CREATE TABLE `languages` (
   `language_name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `languages`
+--
+
+INSERT INTO `languages` (`id`, `user_id`, `language_name`) VALUES
+(3, 3, 'newwwwwww');
+
 -- --------------------------------------------------------
 
 --
@@ -279,7 +299,8 @@ CREATE TABLE `posts` (
 INSERT INTO `posts` (`id`, `content`, `imagePath`, `createdAt`, `userId`) VALUES
 (4, 'fallaaaaaaaaa7aaaaaaaaaaaaaa samaaaaaaaaaaaa', '', '2025-05-05', 3),
 (5, 'اناااااااا فلااااحةةةةة (كود) و فلاااااااحةةة  عاممةةةةةة نسسسيت اقول اني فلاحة', '', '2025-05-05', 3),
-(11, 'repoooooooooooooo', '', '2025-05-09', 10);
+(11, 'repoooooooooooooo', '', '2025-05-09', 10),
+(13, 'sssssssssssssssaaaaaaaaaaaaa', '', '2025-05-10', 5);
 
 -- --------------------------------------------------------
 
@@ -335,6 +356,14 @@ CREATE TABLE `skills` (
   `user_id` int(11) NOT NULL,
   `skill_name` varchar(160) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `skills`
+--
+
+INSERT INTO `skills` (`id`, `user_id`, `skill_name`) VALUES
+(6, 3, 'hhhhhhhh'),
+(7, 3, 'new skillssss nnnnnnn');
 
 -- --------------------------------------------------------
 
@@ -487,31 +516,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `connections`
 --
 ALTER TABLE `connections`
-  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `connectionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `experience`
 --
 ALTER TABLE `experience`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `groups`
@@ -529,13 +558,13 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `languages`
 --
 ALTER TABLE `languages`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `showcasepage`
@@ -547,7 +576,7 @@ ALTER TABLE `showcasepage`
 -- AUTO_INCREMENT for table `skills`
 --
 ALTER TABLE `skills`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`

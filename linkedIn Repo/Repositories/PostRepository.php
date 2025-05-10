@@ -35,6 +35,7 @@ class PostRepository extends BaseRepository implements IPostRepository
 
         $result = $this->insert($query);
         if ($result != false) {
+            
             return true;
         }
         return false;

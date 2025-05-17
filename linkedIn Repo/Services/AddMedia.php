@@ -2,7 +2,6 @@
 class AddMedia {
     public static function upload($fileInputName, $destinationFolder = "../../Views/uploads/") {
         if (isset($_FILES[$fileInputName]) && $_FILES[$fileInputName]['error'] == 0) {
-            // Make sure destination folder exists
             if (!file_exists($destinationFolder)) {
                 mkdir($destinationFolder, 0755, true);
             }
@@ -16,7 +15,7 @@ class AddMedia {
                 return false;
             }
         }
-        return null; // No file uploaded
+        return null; // if no file uploaded
     }
 }
 ?>
